@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="53px" viewBox="0 0 32 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Go</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M1,16.0600801 C1,7.76902537 7.68891856,1 15.9799733,1 C24.271028,1 31,7.76902537 31,16.0600801 C31,21.5874499 26,33.1391351 16,50.7151355 C6,33.1391351 1,21.5874499 1,16.0600801 Z M23.1495327,16.0200267 C23.1495327,12.0547397 19.9452603,8.85046729 15.9799733,8.85046729 C12.0547397,8.85046729 8.85046729,12.0547397 8.85046729,16.0200267 C8.85046729,19.9452603 12.0547397,23.1895861 15.9799733,23.1895861 C19.9452603,23.1895861 23.1495327,19.9452603 23.1495327,16.0200267 Z" id="Go" stroke="#29384B" stroke-width="2" fill="#FE5832"></path>
+    </g>
+</svg>

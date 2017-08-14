@@ -1,21 +1,53 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import '../node_modules/grommet-css';
+
+import HeroMap from './components/HeroMap';
+import MyHeader from './components/Header';
+import Images from './components/Images';
+import MyFooter from './components/Footer';
+
 import './App.css';
 
-class App extends Component {
+import { App } from './components/grommet';
+
+class MyApp extends Component {
+  constructor(props) {
+    super(props);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.state = {
+      fixedHeader: false
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll(event) {
+    const mapHeight = window.innerHeight/2;
+    const scrollTop = event.srcElement.body.scrollTop;
+    if (scrollTop >= mapHeight) this.setState({fixedHeader: true});
+    else this.setState({fixedHeader: false})
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <App centered={false}>
+        <HeroMap />
+        <MyHeader
+          fixed={this.state.fixedHeader}
+          ref={(h) => this.header = h }
+        />
+        <Images />
+        <MyFooter />
+      </App>
     );
   }
 }
 
-export default App;
+export default MyApp;

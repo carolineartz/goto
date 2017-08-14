@@ -3,46 +3,81 @@
   background-color: white;
   padding: 10px;
   margin: 25px;
-  max-width: 80%; }
+  max-width: 80%;
+}
+
+// .images {
+//   max-width: 1280px;
+//   margin: 0 auto;
+// }
+
+// @media screen and (min-width: 1280px) {
+//   .images {
+//     padding-left: 140px;
+//   }
+// }
 
 @media screen and (max-width: 890px) {
   .img {
     position: initial !important;
     width: fit-content;
-    margin: 15px auto !important; } }
+    margin: 15px auto !important;
+  }
+}
+
 
 .fixed {
   position: fixed;
   top: 0;
-  background: white; }
+  background: white;
+}
 
 haeder {
-  background: white; }
+  background: white;
+}
+
 
 .grommetux-layer--closeable:not(.grommetux-layer--hidden) ~ .grommet.grommetux-app--hidden {
-  position: static; }
+  position: static;
+}
 
 #skip-link-layer.grommetux-layer--hidden, .grommetux-layer {
   background: transparent;
   bottom: initial;
   left: calc(100vw - 388px);
-  box-shadow: 1px 4px 9px 0px rgba(0, 0, 0, 0.28);
+  box-shadow: 1px 4px 9px 0px rgba(0,0,0,0.28);
   max-width: 388px;
   max-height: 255px;
-  padding: 2px; }
+  padding: 2px;
+}
 
 @media screen and (min-width: 45em) {
+  // .grommetux-layer--align-center.grommetux-layer--closeable:not(.grommetux-layer--hidden) {
+  //   width: 288px;
+  //   height: 255px;
+  //   left: calc(100vw - 388px);
+  //   top: 0;
+
+  // }
   .grommetux-layer--align-center.grommetux-layer--closeable:not(.grommetux-layer--hidden) .grommetux-layer__container {
+    // bottom: initial;
+    // left: calc(100vw - 388px);
+    // box-shadow: 1px 4px 9px 0px rgba(0,0,0,0.28);
+    // max-width: 388px;
+    // max-height: 255px;
     width: 100%;
     height: 100%;
     padding: 2px;
     top: 0;
     right: 0;
     transform: none;
-    -webkit-transform: none; } }
+    -webkit-transform: none;
+  }
+}
 
 #logo {
   position: absolute;
   top: 260px;
   left: 50px;
-  width: 200px; }
+  width: 200px;
+}
