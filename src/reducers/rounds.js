@@ -37,7 +37,7 @@ const handlers = {
   },
 
   [ROUND_CREATED]: (state, action) => {
-    const [round, ..._previousRounds] = state.all;
+    const [round, ..._previousRounds] = state.all; // eslint-disable-line
     round.place = action.place;
     return {
       all: state.all,
@@ -75,7 +75,7 @@ const handlers = {
       displayTarget: true,
       targetCoordinates,
       guessCoordinates,
-      markers: [targetMarker, guessMarker]
+      markers
     }
   }
 }

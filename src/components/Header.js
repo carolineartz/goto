@@ -6,7 +6,17 @@ import Spinner from 'react-spinkit'
 import { roundSelectMapLocation, roundGuessLocation } from './../actions/rounds';
 
 import GMap from './../components/GMap';
-import { Meter, Value, Header, Label, Box, Menu, Anchor, MoreIcon, Layer } from './grommet';
+import {
+  Meter,
+  Value,
+  Header,
+  Label,
+  Box,
+  Layer,
+  Button,
+  MapLocationIcon,
+  CompassIcon
+  } from './grommet';
 
 const GOOGLE_MAP_URL="https://maps.googleapis.com/maps/api/js?v=3.27&libraries=places,geometry&key=AIzaSyA5PXu1SlMk8pTR4zyFafNWe0AY4hoJnm4"
 
@@ -38,10 +48,12 @@ class MyHeader extends Component {
   }
 
   render() {
-    const className = classNames({ fixed: this.props.fixed })
-
+    // const className = classNames({ fixed: this.props.fixed })
+    const guessButtonClassName = classNames({
+      disabled: !this.props.hasGuess
+    });
     return (
-      <Header size="small" className={className}>
+      <Header style={{...this.props.style, background: "white"}} size="small">
         <Box basis="full" flex="grow" direction="row" justify="between" align="center">
           <Box style={{paddingRight: "0"}} pad={{horizontal: "medium", vertical: "small"}} size="small">
             <Value value={100}
@@ -63,8 +75,9 @@ class MyHeader extends Component {
               label='Total Points'
               units='/ 500' />
           </Box>
-          <Box><button onClick={() => { this.props.makeGuess({guessCoordinates: this.props.guessCoordinates, targetCoordinates: this.props.targetCoordinates}) }}>Guess</button></Box>
-          <Box><button onClick={() => this.showMap()}>Map</button></Box>
+
+          <Button className={guessButtonClassName} disabled={!this.props.hasGuess} accent icon={<CompassIcon />} label="Submit Guess" onClick={() => { this.props.makeGuess({guessCoordinates: this.props.guessCoordinates, targetCoordinates: this.props.targetCoordinates}) }} />
+          <Button primary icon={<MapLocationIcon />} label="Show Map"  onClick={() => this.showMap() } />
         </Box>
         <Layer
           hidden={!this.state.mapIsShown}
@@ -90,7 +103,8 @@ const select = (state) => {
   return {
     targetCoordinates: { latitude: parseFloat(latitude), longitude: parseFloat(longitude) },
     guessCoordinates: state.rounds.guessCoordinates,
-    markers: state.rounds.markers
+    markers: state.rounds.markers,
+    hasGuess: state.rounds.markers.length === 1
   }
 }
 

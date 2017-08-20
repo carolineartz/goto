@@ -20,10 +20,23 @@ import Layer from 'grommet/components/Layer';
 import WorldMap from 'grommet/components/WorldMap';
 import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
+import Button from 'grommet/components/Button';
+import Animate from 'grommet/components/Animate';
 
 
+import CompassIcon from 'grommet/components/icons/base/Compass';
+import LocationIcon from 'grommet/components/icons/base/Location';
+import DeployIcon from 'grommet/components/icons/base/Deploy';
+import WaypointIcon from 'grommet/components/icons/base/Waypoint';
+import NavigateIcon from 'grommet/components/icons/base/Navigate';
+import RobotIcon from 'grommet/components/icons/base/Robot';
+import MapLocationIcon from 'grommet/components/icons/base/MapLocation';
+
+// import RobotIcon from 'grommet/components/icons/base/Robot';
 
 export {
+  Animate,
+  Button,
   Tiles,
   Tile,
   WorldMap,
@@ -48,3 +61,12 @@ export {
   Title
 };
 
+export {
+  MapLocationIcon,
+  CompassIcon,
+  DeployIcon,
+  LocationIcon,
+  WaypointIcon,
+  NavigateIcon,
+  RobotIcon
+};

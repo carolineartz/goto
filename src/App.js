@@ -1,53 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 
+import { StickyContainer, Sticky } from 'react-sticky';
 import '../node_modules/grommet-css';
-
-import HeroMap from './components/HeroMap';
-import MyHeader from './components/Header';
-import Images from './components/Images';
-import MyFooter from './components/Footer';
-
 import './App.css';
 
 import { App } from './components/grommet';
 
-class MyApp extends Component {
-  constructor(props) {
-    super(props);
-    this.handleScroll = this.handleScroll.bind(this);
-    this.state = {
-      fixedHeader: false
-    }
-  }
+import Hero from './components/Hero';
+import MyHeader from './components/Header';
+import Images from './components/Images';
+import MyFooter from './components/Footer';
 
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll(event) {
-    const mapHeight = window.innerHeight/2;
-    const scrollTop = event.srcElement.body.scrollTop;
-    if (scrollTop >= mapHeight) this.setState({fixedHeader: true});
-    else this.setState({fixedHeader: false})
-  }
-
-  render() {
-    return (
-      <App centered={false}>
-        <HeroMap />
-        <MyHeader
-          fixed={this.state.fixedHeader}
-          ref={(h) => this.header = h }
-        />
-        <Images />
-        <MyFooter />
-      </App>
-    );
-  }
-}
+const MyApp = () => (
+  <App centered={false}>
+    <Hero />
+    <StickyContainer>
+      <Sticky>
+        { ({style}) => <MyHeader style={style} /> }
+      </Sticky>
+      <Images />
+      <MyFooter />
+    </StickyContainer>
+  </App>
+)
 
 export default MyApp;

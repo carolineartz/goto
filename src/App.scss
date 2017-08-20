@@ -2,8 +2,12 @@
   border: 1px solid #e6e6e6;
   background-color: white;
   padding: 10px;
-  margin: 25px;
-  max-width: 80%;
+  // margin: 25px;
+  // max-width: 80%;
+}
+
+.grommetux-tiles--fill.grommetux-box--wrap>.grommetux-tile {
+  justify-content: center;
 }
 
 // .images {
@@ -19,9 +23,9 @@
 
 @media screen and (max-width: 890px) {
   .img {
-    position: initial !important;
-    width: fit-content;
-    margin: 15px auto !important;
+    // position: initial !important;
+    // width: fit-content;
+    // margin: 15px auto !important;
   }
 }
 
@@ -80,4 +84,50 @@ haeder {
   top: 260px;
   left: 50px;
   width: 200px;
+}
+
+
+.grommetux-button:not(.grommetux-button--box):hover {
+  border-width: 4px;
+  margin: -2px;
+}
+
+
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin shadow($b, $s, $sm, $c) {
+  box-shadow: 0 0 8px 6px $c,
+  0 0 $b $s rgba(#fff, 0.4),
+  0 0 $b ($s + $sm) $c;
+}
+
+$continent-map: (
+  africa: #4c54a3,
+  asia: #fd5832,
+  austrailia: #23b9d1,
+  europe: #9fd4c8,
+  northAmerica: #ff8729,
+  southAmerica: #23b9d1
+) !default;
+
+circle {
+  transition: all 0.2s;
+}
+
+@each $continent, $color in $continent-map {
+  $i: index($continent-map, ($continent $color));
+  .#{$continent}.ripple {
+    background-color: lighten($color, 5%);
+    animation: $continent (2 + $i/10)+s ($i)+s ease-out infinite;
+  }
+
+  @include keyframes($continent) {
+    0% { @include shadow(0px, 0px, 0px, rgba($color, 0)); }
+    10% { @include shadow(12px, 10px, 4px, $color); }
+    100% { @include shadow(0px, 40px, 0px, rgba($color, 0)); }
+  }
 }

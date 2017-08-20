@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { getImageLocation, getImages } from './../actions/images';
 import { createRound } from './../actions/rounds';
 
-import { Box } from './grommet';
+import { Box, Tile, Tiles } from './grommet';
 
-const buildSrc = ({farmId, serverId, id, secret}) => `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`
+import { buildSrc } from './../actions/apiUtils';
+
+// const buildSrc = ({farmId, serverId, id, secret}) => `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`
 
 class Images extends Component {
   constructor(props) {
@@ -40,18 +42,18 @@ class Images extends Component {
   }
 
   render() {
-    const images = <Box direction="row" wrap alignSelf="center" align="center" justify="center">
-      { this.props.photos.map((photoData, i) =>
-        <div key={`${photoData.id}-${i}`} className='img'>
-          <img src={buildSrc({id: photoData.id, farmId: photoData.farm, secret: photoData.secret, serverId: photoData.server})} />
-        </div>
-        )
-      }
-    </Box>
+    const images = this.props.photos.map((photoData, i) =>
+      <Tile pad="small" key={`${photoData.id}-${i}`} className='img'>
+        <img alt="" src={buildSrc({id: photoData.id, farmId: photoData.farm, secret: photoData.secret, serverId: photoData.server})} />
+      </Tile>
+    );
+
     return (
-      <Box basis="full" pad={{vertical: "medium"}} justify="center">
-        {images}
-        <Box direction="row" wrap alignSelf="center" align="center" justify="center">
+      <Box pad="medium">
+        <Tiles size="small" fill flush>
+          {images}
+        </Tiles>
+        <Box basis="1/4" size="small" direction="row" wrap alignSelf="center" align="center" justify="center">
           <button onClick={this.handleLoadMorePhotos}>More?</button>
         </Box>
       </Box>

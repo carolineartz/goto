@@ -1,0 +1,74 @@
+{
+  "place": {
+    "place_id": "zzA0hmBTUb9GY797pA",
+    "woeid": "23511893",
+    "latitude": "40.772",
+    "longitude": "-73.956",
+    "place_url": "\/United+States\/New+York\/New+York\/Upper+East+Side",
+    "place_type": "neighbourhood",
+    "place_type_id": "22",
+    "timezone": "America\/New_York",
+    "name": "Upper East Side, New York, NY, US, United States",
+    "woe_name": "Upper East Side",
+    "neighbourhood": {
+      "_content": "Upper East Side, New York, NY, US, United States",
+      "place_id": "zzA0hmBTUb9GY797pA",
+      "woeid": "23511893",
+      "latitude": "40.772",
+      "longitude": "-73.956",
+      "place_url": "\/United+States\/New+York\/New+York\/Upper+East+Side"
+    },
+    "locality": {
+      "_content": "New York, NY, United States",
+      "place_id": ".skCPTpTVr.Q3WKW",
+      "woeid": "2459115",
+      "latitude": "40.714",
+      "longitude": "-74.007",
+      "place_url": "\/United+States\/New+York\/New+York"
+    },
+    "county": {
+      "_content": "New York, NY, United States",
+      "place_id": "eFEYI5ZQUL_VqqpXvg",
+      "woeid": "12589342",
+      "latitude": "40.790",
+      "longitude": "-73.966",
+      "place_url": "\/eFEYI5ZQUL_VqqpXvg"
+    },
+    "region": {
+      "_content": "New York, United States",
+      "place_id": "ODHTuIhTUb75gdBu",
+      "woeid": "2347591",
+      "latitude": "42.855",
+      "longitude": "-76.501",
+      "place_url": "\/United+States\/New+York"
+    },
+    "country": {
+      "_content": "United States",
+      "place_id": "nz.gsghTUb4c2WAecA",
+      "woeid": "23424977",
+      "latitude": "37.167",
+      "longitude": "-95.845",
+      "place_url": "\/United+States"
+    },
+    "has_shapedata": 1,
+    "shapedata": {
+      "created": "1292359325",
+      "alpha": "0.00001",
+      "count_points": "10311",
+      "count_edges": "42",
+      "polylines": {
+        "polyline": [{
+          "_content": "40.781482696533,-73.966827392578 40.782398223877,-73.965553283691 40.783958435059,-73.964508056641 40.783870697021,-73.960258483887 40.784797668457,-73.959014892578 40.789085388184,-73.958671569824 40.79109954834,-73.953392028809 40.786487579346,-73.95206451416 40.78392791748,-73.948097229004 40.783851623535,-73.947624206543 40.780574798584,-73.94677734375 40.779663085938,-73.947212219238 40.776477813721,-73.948371887207 40.77420425415,-73.94352722168 40.773132324219,-73.9443359375 40.775207519531,-73.94921875 40.769435882568,-73.949768066406 40.768745422363,-73.94970703125 40.767509460449,-73.950218200684 40.766094207764,-73.950927734375 40.76607131958,-73.95093536377 40.764869689941,-73.951194763184 40.763492584229,-73.952003479004 40.760242462158,-73.954940795898 40.756618499756,-73.958587646484 40.759960174561,-73.961311340332 40.760173797607,-73.961883544922 40.760852813721,-73.963081359863 40.761795043945,-73.964897155762 40.761650085449,-73.966705322266 40.761562347412,-73.968383789062 40.761688232422,-73.970520019531 40.763706207275,-73.973220825195 40.764976501465,-73.974571228027 40.767002105713,-73.973892211914 40.767181396484,-73.973487854004 40.771701812744,-73.972106933594 40.773197174072,-73.971786499023 40.77534866333,-73.97216796875 40.778373718262,-73.972984313965 40.783096313477,-73.971260070801 40.781482696533,-73.966827392578"
+        }]
+      },
+      "has_donuthole": 0,
+      "is_donuthole": 0,
+      "urls": {
+        "shapefile": {
+          "_content": "http:\/\/farm6.static.flickr.com\/5249\/shapefiles\/23511893_20101214_fb01fdd7ec.tar.gz"
+        }
+      }
+    }
+  },
+  "stat": "ok"
+}
