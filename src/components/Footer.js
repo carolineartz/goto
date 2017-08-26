@@ -1,24 +1,25 @@
 import React from 'react';
-import { Footer, Title, Box, Paragraph, Menu, Anchor } from './grommet';
+import { Footer, Box, Paragraph, Menu, Anchor } from './grommet';
+import Logo from './Logo';
 
 const MyFooter = () =>
   <Footer justify='between'
     size='large'
-    pad={{horizontal: "large", vertical: "xlarge"}}
+    pad={{horizontal: 'medium', vertical: 'large'}}
     colorIndex="brand"
-    >
-    <Title>
-       Title
-    </Title>
+  >
+    <Box size="small">
+      <Logo />
+    </Box>
     <Box direction='row'
       align='center'
-      pad={{"between": "medium"}}>
+      pad={{'between': 'medium'}}>
       <Paragraph margin='none'>
         © 2017 Caroline Artz
       </Paragraph>
       <Menu direction='row'
         size='small'
-        dropAlign={{"right": "right"}}>
+        dropAlign={{'right': 'right'}}>
         <Anchor href='#'>
           Support
         </Anchor>
@@ -30,6 +31,6 @@ const MyFooter = () =>
         </Anchor>
       </Menu>
     </Box>
-  </Footer>
+  </Footer>;
 
 export default MyFooter;

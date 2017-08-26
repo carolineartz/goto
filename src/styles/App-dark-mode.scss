@@ -1,0 +1,195 @@
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+// dark mode
+$yellow: #fef28d;
+$bright-green: #a7e35b;
+$teal: #72ffd5;
+$teal-to-cyan: #6afff3;
+$cyan: #68fcf4;
+$light-blue: #33d6fd;
+$blue-1: #0fc0fe;
+$blue-2: #1cbfff;
+$neutral-1: #9193a8;
+$neutral-2: #686a83;
+$neutral-3: #505164;
+$dark-blue: #141526;
+$black: #000000;
+$blackish: #05060A;
+$white: #ffffff;
+$neutral-light: #bdbecb;
+$purple-1: #c271fe;
+$purple-2: #b36cf2;
+$purple-3: #8259d9;
+$purple-4: #593a7e;
+
+
+$dark-mode-primary: $dark-blue;
+
+$continent-map: (
+  africa: #4c54a3,
+  asia: #fd5832,
+  austrailia: #23b9d1,
+  europe: #9fd4c8,
+  northAmerica: #ff8729,
+  southAmerica: #23b9d1
+) !default;
+
+.dark-mode {
+  &.grommet.grommetux-app {
+    background: $dark-mode-primary;
+    color: $neutral-2;
+  }
+
+  header, footer { background: $blackish; }
+  footer,
+  .grommetux-background-color-index--dark .grommetux-paragraph,
+  .grommetux-background-color-index--light .grommetux-background-color-index--dark
+  .grommetux-paragraph {
+    color: $neutral-light !important;
+    a {
+      color: $neutral-2 !important;
+      &:hover {
+        color: $neutral-light !important;
+      }
+    }
+  }
+
+  .logo-letters path, .logo-letters polygon { fill: #505164; }
+  .logo-pin { fill: #fd5832; }
+
+  @mixin shadow($b, $s, $sm, $c) {
+    box-shadow: 0 0 8px 6px $c,
+    0 0 $b $s rgba($dark-mode-primary, 0.4),
+    0 0 $b ($s + $sm) $c;
+  }
+
+  @each $continent, $color in $continent-map {
+    $i: index($continent-map, ($continent $color));
+    .#{$continent}.ripple {
+      animation: $continent+-dark (2 + $i/10)+s ($i*2)+s ease-out infinite;
+    }
+
+    @include keyframes(#{$continent}-dark) {
+      0% { @include shadow(0px, 0px, 0px, rgba($color, 0)); }
+      10% { @include shadow(12px, 10px, 4px, $color); }
+      100% { @include shadow(0px, 40px, 0px, rgba($color, 0)); }
+    }
+  }
+
+  .grommetux-layer .grommetux-layer__container {
+    background: $blackish;
+  }
+
+
+  header .grommetux-meter__graphic-container {
+    .grommetux-meter__tracks path {
+      stroke: darken($neutral-3, 15%);
+    }
+
+    $start-color: #B3FF5A;
+
+    @for $i from 1 through 10 {
+      &[data-value="#{110 - ($i * 10)}"] {
+        .grommetux-meter__values path {
+          stroke: adjust-color($start-color, $blue: -$i*25, $red: $i*25, $green: -14*$i);
+        }
+      }
+    }
+  }
+
+  .grommetux-label--small {
+    font-weight: bold;
+    color: $neutral-2;
+  }
+
+  .grommetux-button {
+    color: $neutral-2;
+    .grommetux-control-icon {
+       fill: $neutral-2;
+       stroke: $neutral-2;
+    }
+
+    border-color: $purple-1;
+
+    &:hover  {
+      box-shadow: 0px 0px 0px 2px $purple-1;
+      color: $neutral-1;
+      .grommetux-control-icon {
+        fill: $neutral-1;
+        stroke: $neutral-1;
+      }
+    }
+
+    &__accent-2 {
+      border-color: $purple-1;
+      &:hover {
+        box-shadow: 0px 0px 0px 2px $purple-1;
+      }
+    }
+
+    &--accent {
+      border-color: $teal-to-cyan;
+      &:hover {
+        box-shadow: 0px 0px 0px 2px $teal-to-cyan;
+      }
+    }
+
+    &__accent-3 {
+      border-color: #fd5832;
+      &:hover {
+        box-shadow: 0px 0px 0px 2px #fd5832;
+      }
+    }
+
+    &--more {
+      $start-color: #B3FF5A;
+
+      @for $i from 1 through 10 {
+        &[data-value="#{110 - ($i * 10)}"] {
+          $color: adjust-color($start-color, $blue: -$i*25, $red: $i*25, $green: -14*$i);
+          border-color: $color;
+          &:hover {
+            box-shadow: 0px 0px 0px 2px $color;
+          }
+        }
+      }
+    }
+
+    &.disabled {
+      color: $neutral-3;
+      border-color: $neutral-3;
+      &:hover {
+        box-shadow: none;
+      }
+
+      .grommetux-control-icon {
+         fill: $neutral-3;
+         stroke: $neutral-3;
+      }
+    }
+  }
+}
+
+
+.round-info-box {
+  background: $teal-to-cyan;
+  color: $blackish;
+  svg path {
+    // fill: $blackish;
+    stroke: $blackish !important;
+  }
+
+  .round-score {
+    // color: darken($teal-to-cyan, 70%);
+    // background: $purple-1;
+    // border-radius: 50%;
+    // svg path {
+    //   // fill: darken($teal-to-cyan, 30%);
+    //   stroke: darken($teal-to-cyan, 70%) !important;
+    // }
+  }
+}

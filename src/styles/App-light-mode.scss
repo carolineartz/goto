@@ -1,0 +1,61 @@
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}
+$dark-blue: #141526;
+$continent-map: (
+  africa: #4c54a3,
+  asia: #fd5832,
+  austrailia: #23b9d1,
+  europe: #9fd4c8,
+  northAmerica: #ff8729,
+  southAmerica: #23b9d1
+) !default;
+
+.light-mode {
+  &.grommet.grommetux-app {
+    color: $dark-blue;
+  }
+  header { background: white; }
+
+  .logo-letters path, .logo-letters polygon { fill: $dark-blue; }
+  .logo-pin { fill: #fd5832; }
+
+  header: { background: white; }
+
+  .grommet img {
+    border: 1px solid #e6e6e6;
+    background-color: white;
+    padding: 10px;
+  }
+
+  @mixin shadow($b, $s, $sm, $c) {
+    box-shadow: 0 0 8px 6px $c,
+    0 0 $b $s rgba(#fff, 0.4),
+    0 0 $b ($s + $sm) $c;
+  }
+
+  @each $continent, $color in $continent-map {
+    $i: index($continent-map, ($continent $color));
+    .#{$continent}.ripple {
+      background-color: lighten($color, 5%);
+      animation: $continent+-light (2 + $i/10)+s ($i*2)+s ease-out infinite;
+    }
+
+    @include keyframes(#{$continent}-light) {
+      0% { @include shadow(0px, 0px, 0px, rgba($color, 0)); }
+      10% { @include shadow(12px, 10px, 4px, $color); }
+      100% { @include shadow(0px, 40px, 0px, rgba($color, 0)); }
+    }
+  }
+
+  .grommetux-button.disabled {
+    border-color: #c6c6c6;
+    cursor: default;
+    color: #c6c6c6;
+    .grommetux-control-icon path {
+      stroke: #c6c6c6 !important;
+    }
+  }
+}

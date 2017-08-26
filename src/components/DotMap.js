@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import mapSvgData from './mapSvgData';
-import { step } from './../lib/rippleAnimation';
+import { makeRipples } from './../lib/rippleAnimation';
 
 const Continent = ({continent, transform, color, start, coordinates}) => (
   <g id={continent} transform={transform} stroke={color} strokeWidth="1" fill={color}>
@@ -18,22 +18,21 @@ const Continent = ({continent, transform, color, start, coordinates}) => (
   </g>
 );
 
-
 class DotMap extends Component {
   componentDidMount() {
-    window.requestAnimationFrame(step);
+    makeRipples();
   }
 
   render() {
     return (
-      <svg viewBox="0 0 985 467">
+      <svg id="dot-map" viewBox="0 0 985 467">
         <g>
           {
             mapSvgData.map(props => <Continent key={props.continent} {...props} />)
           }
         </g>
       </svg>
-    )
+    );
   }
 }
 

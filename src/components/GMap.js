@@ -1,16 +1,16 @@
-import React from "react";
-import { withGoogleMap, GoogleMap, Marker, Polyline } from "react-google-maps";
-import styles from './mapStyles';
-import withScriptjs from "react-google-maps/lib/async/withScriptjs";
-
+import React from 'react';
+import { withGoogleMap, GoogleMap, Marker, Polyline } from 'react-google-maps';
+import { light, dark } from './mapStyles';
+import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 const GMap = withScriptjs(withGoogleMap(props => {
   const markers = props.markers || [];
   const line = <Polyline
     path={markers.map(m => m.position)}
     geodesic={true}
     options={{
-      strokeColor: '#ab1460',
-      strokeWeight: 2,
+      strokeColor: '#ECEFFF',
+      strokeWeight: 3,
+      strokeLineCap: 'round',
       strokeOpacity: 1.0
     }}
   />;
@@ -18,24 +18,24 @@ const GMap = withScriptjs(withGoogleMap(props => {
   return (
     <GoogleMap
       defaultZoom={2}
-      defaultCenter={{lat: -25.363882, lng: 131.044922}}
-      defaultOptions={{styles}}
+      defaultCenter={{lat: 45.363882, lng: 231.044922}}
+      defaultOptions={{styles: (props.mode === 'dark') ? dark : light}}
       onClick={props.onMapClick}
     >
       {
         markers.map((marker, i) => {
-           let { type, position } = marker;
-           return (
-             <Marker
+          let { type, position } = marker;
+          return (
+            <Marker
               key={`marker-${i}`}
               position={position}
               icon={`./../img/${type}-simple.svg`} />
-           )
-         })
+          );
+        })
       }
       { (markers.length === 2) && line }
     </GoogleMap>
-  )
+  );
 }));
 
 export default GMap;

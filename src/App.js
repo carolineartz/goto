@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { StickyContainer, Sticky } from 'react-sticky';
 import '../node_modules/grommet-css';
@@ -11,8 +12,8 @@ import MyHeader from './components/Header';
 import Images from './components/Images';
 import MyFooter from './components/Footer';
 
-const MyApp = () => (
-  <App centered={false}>
+const MyApp = (props) => (
+  <App className={`${props.mode}-mode`} centered={false}>
     <Hero />
     <StickyContainer>
       <Sticky>
@@ -22,6 +23,10 @@ const MyApp = () => (
       <MyFooter />
     </StickyContainer>
   </App>
-)
+);
 
-export default MyApp;
+const select = (state, props) => ({
+  mode: state.app.mode
+});
+
+export default connect(select)(MyApp);

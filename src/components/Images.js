@@ -1,23 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import classNames  from 'classnames';
+import disableScroll from 'disable-scroll';
 import { getImageLocation, getImages } from './../actions/images';
-import { createRound } from './../actions/rounds';
+import { createRound, roundDecreasePossiblePoints } from './../actions/rounds';
 
-import { Box, Tile, Tiles } from './grommet';
+import { Image, Box, Tile, Tiles, Button, Layer } from './grommet';
 
 import { buildSrc } from './../actions/apiUtils';
 
-// const buildSrc = ({farmId, serverId, id, secret}) => `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`
-
 class Images extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.handleLoadMorePhotos = this.handleLoadMorePhotos.bind(this);
+    this.hideExpandedImage = this.hideExpandedImage.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.state = {
+      imageIsExpanded: false,
+      expandedImageSrc: ''
+    };
   }
 
   componentDidMount() {
     this.handleInitialRequest();
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (!nextProps.hasPhotos && !nextProps.placeId) {
+      this.handleInitialRequest();
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -29,8 +40,22 @@ class Images extends Component {
     }
   }
 
+  hideExpandedImage(e) {
+    this.setState({imageIsExpanded: false});
+    disableScroll.off();
+  }
+
+  handleKeyDown(e) {
+    if (e.key === 'Escape') this.hideExpandedImage(e);
+  }
+
+  handleClickTile(id, expandedImageSrc) {
+    this.setState({imageIsExpanded: true, expandedImageSrc });
+    disableScroll.on();
+  }
+
   handleInitialRequest() {
-    this.props.getLocation({round: this.props.round})
+    this.props.getLocation({round: this.props.round});
   }
 
   handleImagesRequest() {
@@ -38,42 +63,70 @@ class Images extends Component {
   }
 
   handleLoadMorePhotos() {
-    this.handleImagesRequest()
+    this.handleImagesRequest();
+    this.props.subtractPossiblePoints();
   }
 
   render() {
-    const images = this.props.photos.map((photoData, i) =>
-      <Tile pad="small" key={`${photoData.id}-${i}`} className='img'>
-        <img alt="" src={buildSrc({id: photoData.id, farmId: photoData.farm, secret: photoData.secret, serverId: photoData.server})} />
-      </Tile>
+    const moreButtonClassName = classNames({
+      disabled: !this.props.canLoadMore,
+      'grommetux-button--accent-3': true,
+      'grommetux-button--more': true
+    });
+    const images = this.props.photos.map((photoData, i) => {
+      const key = `${photoData.id}-${i}`;
+      const photoSrc = buildSrc({id: photoData.id, farmId: photoData.farm, secret: photoData.secret, serverId: photoData.server});
+      return (
+        <Tile pad="small" key={key} id={key} className='img' onClick={this.handleClickTile.bind(this, key, photoSrc)}>
+          <Image alt="" src={photoSrc} />
+        </Tile>
+      );
+    }
     );
 
     return (
-      <Box pad="medium">
-        <Tiles size="small" fill flush>
+      <Box pad="medium" onKeyDown={this.handleKeyDown}>
+        <Tiles fill>
           {images}
         </Tiles>
         <Box basis="1/4" size="small" direction="row" wrap alignSelf="center" align="center" justify="center">
-          <button onClick={this.handleLoadMorePhotos}>More?</button>
+          <Button
+            data-value={this.props.roundPossiblePoints}
+            className={moreButtonClassName}
+            disabled={!this.props.canLoadMore}
+            label="More?"
+            onClick={this.handleLoadMorePhotos}
+          />
         </Box>
+        <Layer
+          className="image-expand-layer"
+          hidden={!this.state.imageIsExpanded}
+          closer={true}
+          onClose={this.hideExpandedImage}
+        >
+          <Box size="large" basis="full"><Image alt="" fit="cover" src={this.state.expandedImageSrc} /></Box>
+        </Layer>
       </Box>
     );
   }
 }
 
 const select = (state, props) => {
- return {
-  placeId: state.images.placeId,
-  nextPage: state.images.page + 1,
-  hasPhotos: !!state.images.images.length,
-  photos: state.images.images
- }
-}
+  return {
+    placeId: state.images.placeId,
+    nextPage: state.images.page + 1,
+    hasPhotos: !!state.images.images.length,
+    photos: state.images.images,
+    roundPossiblePoints: state.rounds.roundPossiblePoints,
+    canLoadMore: state.rounds.roundPossiblePoints > 10
+  };
+};
 
 const send = (dispatch) => ({
   getLocation: ({round}) => dispatch(getImageLocation({round})),
   getImages: ({placeId, page}) => dispatch(getImages({placeId, page})),
-  createRound: ({placeId}) => dispatch(createRound({placeId}))
-})
+  createRound: ({placeId}) => dispatch(createRound({placeId})),
+  subtractPossiblePoints: () => dispatch(roundDecreasePossiblePoints())
+});
 
 export default connect(select, send)(Images);

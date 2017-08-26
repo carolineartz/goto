@@ -1,4 +1,4 @@
-import { IMAGE_LOCATION_SET, IMAGES_SET } from '../actions/images';
+import { IMAGE_LOCATION_SET, IMAGES_SET, IMAGES_CLEAR } from '../actions/images';
 import { createReducer } from './utils';
 
 const initialState = {
@@ -15,13 +15,17 @@ const handlers = {
   [IMAGES_SET]: (state, action) => {
     let images;
     if (action.page === 0) images = action.images;
-    else images = [...state.images, ...action.images]
+    else images = [...state.images, ...action.images];
     return {
       images,
       page: action.page
-    }
-  }
-}
+    };
+  },
+
+  [IMAGES_CLEAR]: (state, action) => ({
+    ...initialState
+  })
+};
 
 export default createReducer(initialState, handlers);
 

@@ -6,10 +6,14 @@ export default class Distance {
     this.guessCoordinates = guessCoordinates;
   }
 
+  miles() {
+    return geolib.convertUnit('mi', this.calculate(), 2);
+  }
+
   calculate() {
     return geolib.getDistance(
       this.targetCoordinates,
       this.guessCoordinates
-    )
+    );
   }
 }

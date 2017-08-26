@@ -22,8 +22,11 @@ import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
 import Button from 'grommet/components/Button';
 import Animate from 'grommet/components/Animate';
+import CheckBox from 'grommet/components/CheckBox';
+import Notification from 'grommet/components/Notification';
 
-
+import SVGIcon from 'grommet/components/SVGIcon';
+import PlayIcon from 'grommet/components/icons/base/Play';
 import CompassIcon from 'grommet/components/icons/base/Compass';
 import LocationIcon from 'grommet/components/icons/base/Location';
 import DeployIcon from 'grommet/components/icons/base/Deploy';
@@ -31,10 +34,15 @@ import WaypointIcon from 'grommet/components/icons/base/Waypoint';
 import NavigateIcon from 'grommet/components/icons/base/Navigate';
 import RobotIcon from 'grommet/components/icons/base/Robot';
 import MapLocationIcon from 'grommet/components/icons/base/MapLocation';
-
+import FormAddIcon from 'grommet/components/icons/base/FormAdd';
 // import RobotIcon from 'grommet/components/icons/base/Robot';
 
 export {
+  PlayIcon,
+  FormAddIcon,
+  Notification,
+  SVGIcon,
+  CheckBox,
   Animate,
   Button,
   Tiles,

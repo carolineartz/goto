@@ -1,17 +1,28 @@
 import React from 'react';
-import { Box, Image } from './grommet';
+import { connect } from 'react-redux';
+import { Box } from './grommet';
 import DotMap from './DotMap';
-const Hero = () =>
+import ModeSwitcher from './ModeSwitcher';
+import Logo from './Logo';
+const Hero = (props) =>
   <Box
+    id="hero"
+    full
     align="center"
     justify="center"
-    pad="medium"
+    pad={{vertical: 'large', horizontal: 'medium'}}
+    margin={{vertical: 'medium'}}
     flex="grow"
     responsive
-    size={{height: "large"}}
+    direction="row"
+    size={{height: 'large'}}
   >
-    <Image id="logo" src="./../img/logo.svg" />
-    <DotMap />
-  </Box>
+    <Box className="logo-main-container" justify="center" align="center" size="medium"><Logo /></Box>
+    <ModeSwitcher mode={props.mode} />
+    <Box flex="grow" size="large"><DotMap /></Box>
+  </Box>;
 
-export default Hero;
+const select = (state, props) => ({
+  mode: state.app.mode
+});
+export default connect(select)(Hero);
