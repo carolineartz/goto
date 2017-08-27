@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import classNames  from 'classnames';
 import disableScroll from 'disable-scroll';
 import { getImageLocation, getImages } from './../actions/images';
-import { createRound, roundDecreasePossiblePoints } from './../actions/rounds';
+import { roundInitialize, createRound, roundDecreasePossiblePoints } from './../actions/rounds';
 
 import { Image, Box, Tile, Tiles, Button, Layer } from './grommet';
 
@@ -17,11 +17,13 @@ class Images extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.state = {
       imageIsExpanded: false,
-      expandedImageSrc: ''
+      expandedImageSrc: '',
+      hasPlace: props.placeId
     };
   }
 
   componentDidMount() {
+    this.props.initializeRound();
     this.handleInitialRequest();
   }
 
@@ -112,13 +114,16 @@ class Images extends Component {
 }
 
 const select = (state, props) => {
+  const round = state.rounds.current;
+
   return {
-    placeId: state.images.placeId,
+    round,
+    placeId: round.place.externalId || state.images.placeId,
     nextPage: state.images.page + 1,
     hasPhotos: !!state.images.images.length,
     photos: state.images.images,
-    roundPossiblePoints: state.rounds.roundPossiblePoints,
-    canLoadMore: state.rounds.roundPossiblePoints > 10
+    roundPossiblePoints: round.possiblePoints,
+    canLoadMore: round.possiblePoints > 10
   };
 };
 
@@ -126,6 +131,7 @@ const send = (dispatch) => ({
   getLocation: ({round}) => dispatch(getImageLocation({round})),
   getImages: ({placeId, page}) => dispatch(getImages({placeId, page})),
   createRound: ({placeId}) => dispatch(createRound({placeId})),
+  initializeRound: () => dispatch(roundInitialize()),
   subtractPossiblePoints: () => dispatch(roundDecreasePossiblePoints())
 });
 

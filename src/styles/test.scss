@@ -1,0 +1,16 @@
+.round-info-slider {
+  background: transparent;
+
+  .ns-close {
+    top: 1.8em;
+    right: 1.8em;
+
+    .ns-show &  {
+      animation-name: animFade;
+      animation-duration: 0.3s;
+      animation-fill-mode: forwards;
+      opacity: 0;
+    }
+  }
+}
+

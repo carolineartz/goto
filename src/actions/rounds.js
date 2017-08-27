@@ -5,6 +5,11 @@ export const ROUND_LOCATION_INFO_FETCHING = 'ROUND_LOCATION_INFO_FETCHING';
 export const ROUND_GUESS_LOCATION = 'ROUND_GUESS_LOCATION';
 export const ROUND_SELECT_MAP_LOCATION = 'ROUND_SELECT_MAP_LOCATION';
 export const ROUND_DECREASE_POSSIBLE_POINTS = 'ROUND_DECREASE_POSSIBLE_POINTS';
+export const ROUND_INITIALIZE = 'ROUND_INITIALIZE';
+
+export const roundInitialize = () => ({
+  type: ROUND_INITIALIZE
+});
 
 export const fetchingRoundLocationInfo = ({placeId}) => ({
   type: ROUND_LOCATION_INFO_FETCHING,
@@ -21,10 +26,10 @@ export const roundSelectMapLocation = ({guessCoordinates}) => ({
   guessCoordinates
 });
 
-export const roundGuessLocation = ({guessCoordinates, targetCoordinates}) => ({
+export const roundGuessLocation = ({guessCoordinates, placeCoordinates}) => ({
   type: ROUND_GUESS_LOCATION,
   guessCoordinates,
-  targetCoordinates
+  placeCoordinates
 });
 
 export const roundDecreasePossiblePoints = () => ({

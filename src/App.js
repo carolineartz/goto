@@ -11,10 +11,12 @@ import Hero from './components/Hero';
 import MyHeader from './components/Header';
 import Images from './components/Images';
 import MyFooter from './components/Footer';
+import GameOverview from './components/GameOverview';
 
 const MyApp = (props) => (
   <App className={`${props.mode}-mode`} centered={false}>
     <Hero />
+    <GameOverview />
     <StickyContainer>
       <Sticky>
         { ({style}) => <MyHeader style={style} /> }

@@ -3,62 +3,59 @@ import { connect } from 'react-redux';
 
 import {
   Box,
-  Notification,
   Animate,
   Value,
   LocationIcon,
   FormAddIcon
 } from './grommet';
-// <Notification message='Sample message'
-//   size='medium'
-//   className="round-info-box"
-//   style={{minHeight: "100px"}}
-// />
+
 class RoundStatus extends Component {
   render() {
+    const displayRoundInfo = !!this.props.roundScore;
+
     return (
       <Box className="round-info-box-wrapper">
         <Animate
-          enter={{'animation': 'slide-right', 'duration': 1000, 'delay': 1000}}
-          visible={this.props.displayRoundInfo}
+          enter={{'animation': 'fade', 'duration': 1, 'delay': 0}}
+          visible={displayRoundInfo}
         >
           <Box direction='row' align="center" className='round-info-box'>
-            <Box pad="small" className='round-location'>
+            <Box pad="small" justify="center" className='round-location'>
               <Value value={this.props.distanceInMiles}
                 icon={<LocationIcon />}
-                label={this.props.targetPlaceName}
+                label={this.props.placeName}
                 units='mi'
                 responsive
                 size='medium'
                 align='start'
               />
             </Box>
-            <Box pad="small" className='round-score'>
-              <Animate
-                enter={{'animation': 'fade', 'duration': 1000, 'delay': 2000}}
+            <Animate
+                enter={{'animation': 'slide-right', 'duration': 1000, 'delay': 2000}}
                 visible
                 keep
               >
-                <Value value={this.props.roundScore}
-                  icon={<FormAddIcon />}
-                  units='pts'
-                  label={`round ${this.props.roundNumber} / 5`}
-                />
-              </Animate>
-            </Box>
+                <Box pad="small" justify="center" className='round-score'>
+                  <Value value={this.props.roundScore}
+                    icon={<FormAddIcon />}
+                    units='pts'
+                    label={`round ${this.props.roundNumber} / 5`}
+                  />
+                </Box>
+            </Animate>
           </Box>
         </Animate>
       </Box>
     );
   }
 }
-const select = (state) => ({
-  roundScore: state.rounds.roundScore,
-  hasRoundScore: state.rounds.hasRoundScore,
-  // displayRoundInfo: true
-  roundNumber: state.rounds.nextRoundIndex,
-  displayRoundInfo: state.rounds.hasRoundScore,
-  targetPlaceName: state.rounds.currentRound.place.place.name,
-  distanceInMiles: state.rounds.distance
-});
+const select = (state) => {
+  const round = state.rounds.current;
+  return {
+    roundScore: round.score,
+    roundNumber: round.number,
+    placeName: round.place.name,
+    distanceInMiles: round.distance
+  };
+};
 export default connect(select)(RoundStatus);

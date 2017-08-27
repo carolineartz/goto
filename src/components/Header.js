@@ -3,7 +3,7 @@ import classNames  from 'classnames';
 import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
 
-import { roundSelectMapLocation, roundGuessLocation } from './../actions/rounds';
+import { roundSelectMapLocation, roundGuessLocation, roundInitialize } from './../actions/rounds';
 import { clearImages } from './../actions/images';
 
 import RoundStatus from './RoundStatus';
@@ -34,19 +34,24 @@ class MyHeader extends Component {
     this.state = {
       mapIsShown: false,
       pinDropped: false,
-      hasGuess: this.props.hasGuess
+      devDisplay: false
     };
   }
 
   showMap() {
-    this.setState({mapIsShown: !this.state.mapIsShown}); 
+    this.setState({
+      mapIsShown: !this.state.mapIsShown,
+      devDisplay: !this.state.devDisplay
+    });
   }
 
   hideMap() {
-    this.setState({mapIsShown: false}); 
+    this.setState({mapIsShown: false});
   }
 
   handleClickMap(event) {
+    if (this.props.roundComplete) return;
+
     const guessCoordinates = {
       latitude: event.latLng.lat(),
       longitude: event.latLng.lng()
@@ -56,35 +61,35 @@ class MyHeader extends Component {
   }
 
   handleClickMakeGuess() {
-    if (!this.state.hasGuess) {
+    if (!this.props.roundComplete) {
       this.props.makeGuess({
         guessCoordinates: this.props.guessCoordinates,
-        targetCoordinates: this.props.targetCoordinates
+        placeCoordinates: this.props.placeCoordinates
       });
-      this.setState({hasGuess: true});
     }
     else {
-      return null; 
+      return null;
     }
   }
 
   handleClickNextRound() {
+    this.props.clearImages();
     this.props.startNextRound();
-    this.setState({hasGuess: false});
   }
 
   render() {
-    const { hasGuess, hasRoundScore, roundPossiblePoints, totalScore, mode, markers } = this.props;
+    const { hasGuess, roundComplete, hasRoundScore, roundPossiblePoints, totalScore, mode, markers } = this.props;
     const { mapIsShown } = this.state;
     const guessBtnClass = classNames({disabled: !hasGuess});
     const mapLayerClass = classNames({visible: mapIsShown});
     const mapButtonLabel = mapIsShown ? 'Hide' : 'Show';
+    // debugger
 
     return (
       <Header style={{...this.props.style}} size="small">
         <Box basis="full" flex="grow" direction="row" justify="between" align="center">
           <Box style={{paddingRight: '0'}} pad={{horizontal: 'medium', vertical: 'small'}} size="small">
-            <RoundStatus />
+            <RoundStatus devDisplay={this.state.devDisplay} />
             <Value value={roundPossiblePoints}
               align='start'
               size="small"
@@ -106,7 +111,14 @@ class MyHeader extends Component {
           </Box>
           <Box pad={{horizontal: 'small', vertical: 'none'}}>
             {
-              (hasGuess || !hasGuess && !hasRoundScore) ?
+              roundComplete ?
+                <Button
+                  style={{width: '188px'}}
+                  className="grommetux-button__accent-3"
+                  icon={<PlayIcon />}
+                  label="Next Round"
+                  onClick={this.handleClickNextRound}
+                /> :
                 <Button
                   style={{width: '188px'}}
                   className={guessBtnClass}
@@ -115,13 +127,6 @@ class MyHeader extends Component {
                   icon={<CompassIcon />}
                   label="Submit Guess"
                   onClick={this.handleClickMakeGuess}
-                /> :
-                <Button
-                  style={{width: '188px'}}
-                  className="grommetux-button__accent-3"
-                  icon={<PlayIcon />}
-                  label="Next Round"
-                  onClick={this.handleClickNextRound}
                 />
             }
           </Box>
@@ -158,25 +163,27 @@ class MyHeader extends Component {
 }
 
 const select = (state) => {
-  const { latitude, longitude } = state.rounds.currentRound.place.place;
+  const round = state.rounds.current;
 
   return {
-    targetCoordinates: { latitude: parseFloat(latitude), longitude: parseFloat(longitude) },
-    guessCoordinates: state.rounds.guessCoordinates,
-    markers: state.rounds.markers,
-    hasRoundScore: state.rounds.hasRoundScore,
-    hasGuess: state.rounds.markers.length === 1,
+    placeCoordinates: round.place && round.place.coordinates,
+    guessCoordinates: round.guess.coordinates,
+    markers: round.markers,
+    hasGuess: round.markers.length === 1,
+    hasRoundScore: !!round.score,
+    roundComplete: round.isCompleted,
     totalScore: state.rounds.totalScore,
-    roundPossiblePoints: state.rounds.roundPossiblePoints,
+    roundPossiblePoints: round.possiblePoints,
     mode: state.app.mode
   };
 };
 
 const send = (dispatch) => ({
-  makeGuess: ({guessCoordinates, targetCoordinates }) =>
-    dispatch(roundGuessLocation({guessCoordinates, targetCoordinates})),
+  makeGuess: ({guessCoordinates, placeCoordinates }) =>
+    dispatch(roundGuessLocation({guessCoordinates, placeCoordinates})),
   dropPin: ({guessCoordinates}) => dispatch(roundSelectMapLocation({guessCoordinates})),
-  startNextRound: () => dispatch(clearImages())
+  startNextRound: () => dispatch(roundInitialize()),
+  clearImages: () => dispatch(clearImages())
 });
 
 export default connect(select, send)(MyHeader);

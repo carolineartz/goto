@@ -174,22 +174,21 @@ $continent-map: (
   }
 }
 
-
 .round-info-box {
-  background: $teal-to-cyan;
-  color: $blackish;
-  svg path {
-    // fill: $blackish;
-    stroke: $blackish !important;
+  .round-score {
+    background: $teal-to-cyan;
+    color: $blackish;
+    svg path {
+      stroke: $blackish !important;
+    }
   }
 
-  .round-score {
-    // color: darken($teal-to-cyan, 70%);
-    // background: $purple-1;
-    // border-radius: 50%;
-    // svg path {
-    //   // fill: darken($teal-to-cyan, 30%);
-    //   stroke: darken($teal-to-cyan, 70%) !important;
-    // }
+  .round-location {
+    background: $dark-blue;
+    border: 3px solid $teal-to-cyan;
+    color: $teal-to-cyan;
+    svg path {
+      stroke: $teal-to-cyan!important;
+    }
   }
 }

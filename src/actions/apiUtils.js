@@ -16,19 +16,19 @@ const buildDevEndpoint = (query) => {
 };
 
 export const buildSrc = ({farmId, serverId, id, secret}) => {
-  if (process.env.NODE_ENV === 'development') {
-    return `/api/flickr/${id}_${secret}.jpg`;
-  }
-  else {
+  // if (process.env.NODE_ENV === 'development') {
+  //   return `/api/flickr/${id}_${secret}.jpg`;
+  // }
+  // else {
     return `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`;
-  }
+  // }
 };
 
 export const buildEndpoint = (query) => {
-  if (process.env.NODE_ENV === 'development') {
-    return buildDevEndpoint(query);
-  }
-  else {
+  // if (process.env.NODE_ENV === 'development') {
+  //   return buildDevEndpoint(query);
+  // }
+  // else {
     const baseQuery = {
       api_key: FLICKR_API_KEY,
       format: 'json',
@@ -36,7 +36,7 @@ export const buildEndpoint = (query) => {
     };
     const qs = queryString.stringify({...query, ...baseQuery});
     return `https://api.flickr.com/services/rest/?${qs}`;
-  }
+  // }
 };
 
 
