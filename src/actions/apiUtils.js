@@ -11,19 +11,45 @@ export const randomMomentBefore = ({when = moment(), min = 2, max = 1000} = {}) 
   when.subtract(Math.round(getRandomNum(min, max)), 'days')
 );
 
+const buildDevEndpoint = (query) => {
+  const { method, per_page: perPage } = query;
+  if (method === 'flickr.photos.search' && perPage === '1') {
+    return '/api/initialPhoto.json';
+  }
+  else if (method === 'flickr.photos.search') {
+    return '/api/locationPhotosPage1.json';
+  }
+  else if (method === 'flickr.places.getInfo') {
+    return '/api/place.json';
+  }
+  else if (method === 'flickr.places.getTopPlacesList') {
+    return '/api/topPlaces.json';
+  }
+};
+
 export const buildSrc = ({farmId, serverId, id, secret}) => {
-  return `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`;
+  if (process.env.NODE_ENV === 'development') {
+    return `/api/flickr/${id}_${secret}.jpg`;
+  }
+  else {
+    return `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`;
+  }
 };
 
 
 export const buildEndpoint = (query) => {
-  const baseQuery = {
-    api_key: FLICKR_API_KEY,
-    format: 'json',
-    nojsoncallback: '?'
-  };
-  const qs = queryString.stringify({...query, ...baseQuery});
-  return `https://api.flickr.com/services/rest/?${qs}`;
+  if (process.env.NODE_ENV === 'development') {
+    return buildDevEndpoint(query);
+  }
+  else {
+    const baseQuery = {
+      api_key: FLICKR_API_KEY,
+      format: 'json',
+      nojsoncallback: '?'
+    };
+    const qs = queryString.stringify({...query, ...baseQuery});
+    return `https://api.flickr.com/services/rest/?${qs}`;
+  }
 };
 
 export const buildTopPlacesEndpoint = ({date = moment()}) => {

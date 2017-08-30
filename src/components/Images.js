@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 import classNames  from 'classnames';
 import disableScroll from 'disable-scroll';
+
 import { getImages, initialGetImages } from './../actions/images';
 import { roundInitialize, createRound, roundDecreasePossiblePoints } from './../actions/rounds';
+import { buildSrc } from './../actions/apiUtils';
 
 import { Image, Box, Tile, Tiles, Button, Layer } from './grommet';
-
-import { buildSrc } from './../actions/apiUtils';
+import Spinner from 'react-spinkit';
 
 class Images extends Component {
   constructor(props) {
@@ -90,6 +90,12 @@ class Images extends Component {
 
     return (
       <Box pad="medium" onKeyDown={this.handleKeyDown}>
+        {
+          !this.props.photos.length &&
+            <Box pad="medium" margin="medium" align="center" justify="center">
+              <Spinner name="ball-scale-ripple-multiple" color="fuchsia"/>
+            </Box>
+        }
         <Tiles fill>
           {images}
         </Tiles>
