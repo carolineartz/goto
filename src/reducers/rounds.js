@@ -21,9 +21,14 @@ const initialState = {
 };
 
 const handlers = {
-  [ROUND_INITIALIZE]: (state, action) => ({
-    current: state.current.next()
-  }),
+  [ROUND_INITIALIZE]: (state, action) => {
+    const round = state.current.next();
+
+    return {
+      current: round,
+      number: round.number
+    };
+  },
 
   [ROUND_LOCATION_INFO_FETCHING]: (state, action) => {
     const round = state.current;
@@ -31,6 +36,7 @@ const handlers = {
 
     return {
       current: round,
+      placeId: action.placeId,
       all: [round, ...state.all]
     };
   },

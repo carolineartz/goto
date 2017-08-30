@@ -1,15 +1,22 @@
-import { IMAGE_LOCATION_SET, IMAGES_SET, IMAGES_CLEAR } from '../actions/images';
+import {
+  IMAGES_SET,
+  IMAGES_CLEAR,
+  IMAGE_PLACES_SET
+} from '../actions/images';
+
 import { createReducer } from './utils';
 
 const initialState = {
   placeId: null,
   images: [],
-  page: 0
+  page: 0,
+  places: []
 };
 
 const handlers = {
-  [IMAGE_LOCATION_SET]: (state, action) => ({
-    placeId: action.placeId,
+  [IMAGE_PLACES_SET]: (state, action) => ({
+    places: action.places,
+    placeId: action.places[0].place_id
   }),
 
   [IMAGES_SET]: (state, action) => {
@@ -23,7 +30,7 @@ const handlers = {
   },
 
   [IMAGES_CLEAR]: (state, action) => ({
-    ...initialState
+    ...initialState, places: state.places
   })
 };
 

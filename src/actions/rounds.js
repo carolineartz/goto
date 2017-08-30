@@ -6,6 +6,7 @@ export const ROUND_GUESS_LOCATION = 'ROUND_GUESS_LOCATION';
 export const ROUND_SELECT_MAP_LOCATION = 'ROUND_SELECT_MAP_LOCATION';
 export const ROUND_DECREASE_POSSIBLE_POINTS = 'ROUND_DECREASE_POSSIBLE_POINTS';
 export const ROUND_INITIALIZE = 'ROUND_INITIALIZE';
+export const ROUND_CREATING = 'ROUND_CREATING';
 
 export const roundInitialize = () => ({
   type: ROUND_INITIALIZE
@@ -13,6 +14,11 @@ export const roundInitialize = () => ({
 
 export const fetchingRoundLocationInfo = ({placeId}) => ({
   type: ROUND_LOCATION_INFO_FETCHING,
+  placeId
+});
+
+export const roundCreating = ({placeId}) => ({
+  type: ROUND_CREATING,
   placeId
 });
 

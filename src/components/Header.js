@@ -78,7 +78,7 @@ class MyHeader extends Component {
   }
 
   render() {
-    const { hasGuess, roundComplete, hasRoundScore, roundPossiblePoints, totalScore, mode, markers } = this.props;
+    const { hasGuess, roundComplete, roundPossiblePoints, totalScore, mode, markers } = this.props;
     const { mapIsShown } = this.state;
     const guessBtnClass = classNames({disabled: !hasGuess});
     const mapLayerClass = classNames({visible: mapIsShown});
@@ -170,7 +170,6 @@ const select = (state) => {
     guessCoordinates: round.guess.coordinates,
     markers: round.markers,
     hasGuess: round.markers.length === 1,
-    hasRoundScore: !!round.score,
     roundComplete: round.isCompleted,
     totalScore: state.rounds.totalScore,
     roundPossiblePoints: round.possiblePoints,
@@ -182,7 +181,7 @@ const send = (dispatch) => ({
   makeGuess: ({guessCoordinates, placeCoordinates }) =>
     dispatch(roundGuessLocation({guessCoordinates, placeCoordinates})),
   dropPin: ({guessCoordinates}) => dispatch(roundSelectMapLocation({guessCoordinates})),
-  startNextRound: () => dispatch(roundInitialize()),
+  startNextRound: (placeId) => dispatch(roundInitialize()),
   clearImages: () => dispatch(clearImages())
 });
 

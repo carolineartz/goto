@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+
 import { connect } from 'react-redux';
 import classNames  from 'classnames';
 import disableScroll from 'disable-scroll';
-import { getImageLocation, getImages } from './../actions/images';
+import { getImages, initialGetImages } from './../actions/images';
 import { roundInitialize, createRound, roundDecreasePossiblePoints } from './../actions/rounds';
 
 import { Image, Box, Tile, Tiles, Button, Layer } from './grommet';
@@ -17,28 +18,33 @@ class Images extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.state = {
       imageIsExpanded: false,
-      expandedImageSrc: '',
-      hasPlace: props.placeId
+      expandedImageSrc: ''
     };
   }
 
+  componentWillMount() {
+    this.props.getPlacesImages();
+  }
+
   componentDidMount() {
-    this.props.initializeRound();
-    this.handleInitialRequest();
+    this.props.initializeGame();
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (!nextProps.hasPhotos && !nextProps.placeId) {
-      this.handleInitialRequest();
+    if (!this.props.places.length && nextProps.places.length) {
+      const placeId = nextProps.places[0].place_id;
+      this.setState({placeId});
+      this.props.createRound({placeId});
+      this.handleImagesRequest({placeId});
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.props.hasPhotos && !!this.props.placeId) {
-      this.handleImagesRequest();
-    }
-    if (!prevProps.placeId && !!this.props.placeId) {
-      this.props.createRound({placeId: this.props.placeId});
+    if (!this.props.placeId && prevProps.hasPhotos) {
+      const placeId = this.props.places[this.props.round.number - 1].place_id;
+      this.setState({placeId});
+      this.props.createRound({placeId});
+      this.handleImagesRequest({placeId});
     }
   }
 
@@ -56,16 +62,12 @@ class Images extends Component {
     disableScroll.on();
   }
 
-  handleInitialRequest() {
-    this.props.getLocation({round: this.props.round});
-  }
-
-  handleImagesRequest() {
-    this.props.getImages({placeId: this.props.placeId, page: this.props.nextPage});
+  handleImagesRequest({placeId, more = false} = {}) {
+    this.props.getImages({placeId, page: this.props.nextPage, more});
   }
 
   handleLoadMorePhotos() {
-    this.handleImagesRequest();
+    this.handleImagesRequest({placeId: this.state.placeId, more: true});
     this.props.subtractPossiblePoints();
   }
 
@@ -123,16 +125,17 @@ const select = (state, props) => {
     hasPhotos: !!state.images.images.length,
     photos: state.images.images,
     roundPossiblePoints: round.possiblePoints,
-    canLoadMore: round.possiblePoints > 10
+    canLoadMore: round.possiblePoints > 10,
+    places: state.images.places
   };
 };
 
 const send = (dispatch) => ({
-  getLocation: ({round}) => dispatch(getImageLocation({round})),
-  getImages: ({placeId, page}) => dispatch(getImages({placeId, page})),
+  getImages: ({placeId, page, more}) => dispatch(getImages({placeId, page, more})),
   createRound: ({placeId}) => dispatch(createRound({placeId})),
-  initializeRound: () => dispatch(roundInitialize()),
-  subtractPossiblePoints: () => dispatch(roundDecreasePossiblePoints())
+  initializeGame: () => dispatch(roundInitialize()),
+  subtractPossiblePoints: () => dispatch(roundDecreasePossiblePoints()),
+  getPlacesImages: () => dispatch(initialGetImages())
 });
 
 export default connect(select, send)(Images);
