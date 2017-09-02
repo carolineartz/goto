@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import mapSvgData from './mapSvgData';
+import mapSvgData from './../data/mapSvgData';
 import { makeRipples } from './../lib/rippleAnimation';
 
 const Continent = ({continent, transform, color, start, coordinates}) => (

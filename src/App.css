@@ -192,6 +192,12 @@
 body {
   margin-top: -25px; }
 
+a[title="Interactive JavaScript maps"], g[cursor="pointer"] {
+  display: none !important; }
+
+div[id^="__AmCharts"] path[stroke="#FFFFFF"] {
+  stroke: #141526 !important; }
+
 #root {
   position: relative; }
 
@@ -459,6 +465,11 @@ circle {
 .round-location {
   animation: 1s linear animJelly; }
 
+#game-overview-layer:not(.grommetux-layer--hidden) ~ .grommetux-app {
+  height: calc(100vh + 25px);
+  width: 100%;
+  position: absolute; }
+
 .dark-mode.grommet.grommetux-app {
   background: #141526;
   color: #686a83; }
@@ -679,6 +690,10 @@ circle {
   color: #6afff3; }
   .round-info-box .round-location svg path {
     stroke: #6afff3 !important; }
+
+#game-overview-layer > div {
+  background: #141526;
+  color: #686a83 !important; }
 
 .light-mode {
   header-background: white; }

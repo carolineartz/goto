@@ -40,6 +40,7 @@ class Images extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (!this.props.places[this.props.round.number - 1]) return;
     if (!this.props.placeId && prevProps.hasPhotos) {
       const placeId = this.props.places[this.props.round.number - 1].place_id;
       this.setState({placeId});
@@ -85,8 +86,7 @@ class Images extends Component {
           <Image alt="" src={photoSrc} />
         </Tile>
       );
-    }
-    );
+    });
 
     return (
       <Box pad="medium" onKeyDown={this.handleKeyDown}>

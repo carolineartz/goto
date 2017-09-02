@@ -31,17 +31,17 @@ class RoundStatus extends Component {
               />
             </Box>
             <Animate
-                enter={{'animation': 'slide-right', 'duration': 1000, 'delay': 2000}}
-                visible
-                keep
-              >
-                <Box pad="small" justify="center" className='round-score'>
-                  <Value value={this.props.roundScore}
-                    icon={<FormAddIcon />}
-                    units='pts'
-                    label={`round ${this.props.roundNumber} / 5`}
-                  />
-                </Box>
+              enter={{'animation': 'slide-right', 'duration': 1000, 'delay': 2000}}
+              visible
+              keep
+            >
+              <Box pad="small" justify="center" className='round-score'>
+                <Value value={this.props.roundScore}
+                  icon={<FormAddIcon />}
+                  units='pts'
+                  label={`round ${this.props.roundNumber} / 5`}
+                />
+              </Box>
             </Animate>
           </Box>
         </Animate>

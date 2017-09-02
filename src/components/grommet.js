@@ -24,6 +24,8 @@ import Button from 'grommet/components/Button';
 import Animate from 'grommet/components/Animate';
 import CheckBox from 'grommet/components/CheckBox';
 import Notification from 'grommet/components/Notification';
+import List from 'grommet/components/List';
+import ListItem from 'grommet/components/ListItem';
 
 import SVGIcon from 'grommet/components/SVGIcon';
 import PlayIcon from 'grommet/components/icons/base/Play';
@@ -41,6 +43,8 @@ export {
   PlayIcon,
   FormAddIcon,
   Notification,
+  List,
+  ListItem,
   SVGIcon,
   CheckBox,
   Animate,

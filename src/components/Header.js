@@ -83,7 +83,6 @@ class MyHeader extends Component {
     const guessBtnClass = classNames({disabled: !hasGuess});
     const mapLayerClass = classNames({visible: mapIsShown});
     const mapButtonLabel = mapIsShown ? 'Hide' : 'Show';
-    // debugger
 
     return (
       <Header style={{...this.props.style}} size="small">

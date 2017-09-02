@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@amcharts/amcharts3-react": "^3.0.1",
+    "ammap3": "amcharts/ammap3",
     "classnames": "^2.2.5",
     "disable-scroll": "^0.3.0",
     "eslint-plugin-react": "^7.3.0",

@@ -4,6 +4,7 @@ import { Box } from './grommet';
 import DotMap from './DotMap';
 import ModeSwitcher from './ModeSwitcher';
 import Logo from './Logo';
+
 const Hero = (props) =>
   <Box
     id="hero"

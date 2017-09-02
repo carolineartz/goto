@@ -192,3 +192,8 @@ $continent-map: (
     }
   }
 }
+
+#game-overview-layer > div {
+  background: $dark-blue;
+  color:  $neutral-2 !important;
+}

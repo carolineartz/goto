@@ -218,3 +218,7 @@
   color: #6afff3; }
   .round-info-box .round-location svg path {
     stroke: #6afff3 !important; }
+
+#game-overview-layer > div {
+  background: #141526;
+  color: #686a83 !important; }

@@ -4,9 +4,15 @@ body {
   margin-top: -25px;
 }
 
-// .grommet, .brand-font {
-//   font-family: 'MetricH';
-// }
+a[title="Interactive JavaScript maps"], g[cursor="pointer"] {
+  display: none !important;
+}
+
+div[id^="__AmCharts"] path {
+  &[stroke="#FFFFFF"] {
+    stroke: #141526 !important;
+  }
+}
 
 #root {
   position: relative;
@@ -300,6 +306,13 @@ circle {
 
 .round-location {
   animation: 1s linear animJelly;
+}
+
+
+#game-overview-layer:not(.grommetux-layer--hidden) ~ .grommetux-app {
+  height: calc(100vh + 25px);
+  width: 100%;
+  position: absolute;
 }
 
 // .gm-style div {

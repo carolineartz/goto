@@ -1,6 +1,6 @@
 import React from 'react';
 import { withGoogleMap, GoogleMap, Marker, Polyline } from 'react-google-maps';
-import { light, dark } from './mapStyles';
+import { light, dark } from './../data/mapStyles';
 import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 const GMap = withScriptjs(withGoogleMap(props => {
   const markers = props.markers || [];

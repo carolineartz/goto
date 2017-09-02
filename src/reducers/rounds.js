@@ -17,7 +17,8 @@ const initialState = {
   all: [],
   displayTarget: false,
   displayGuess: false,
-  totalScore: 0
+  totalScore: 0,
+  gamesComplete: false
 };
 
 const handlers = {
@@ -26,7 +27,8 @@ const handlers = {
 
     return {
       current: round,
-      number: round.number
+      number: round.number,
+      gamesComplete: round.number === 6
     };
   },
 
@@ -64,6 +66,7 @@ const handlers = {
   [ROUND_GUESS_LOCATION]: (state, action) => {
     const round = state.current;
     round.advanceStatus();
+
     return {
       current: round,
       totalScore: state.totalScore + round.score
