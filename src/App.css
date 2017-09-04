@@ -214,48 +214,7 @@ header {
 .grommetux-tiles--fill.grommetux-box--wrap > .grommetux-tile {
   justify-content: center; }
 
-#google-maps-layer.grommetux-layer--closeable:not(.grommetux-layer--hidden) ~ .grommet.grommetux-app--hidden {
-  position: static; }
-
-#google-maps-layer.grommetux-layer {
-  background: transparent;
-  bottom: initial;
-  left: calc(100vw - 388px);
-  box-shadow: 1px 4px 9px 0px rgba(0, 0, 0, 0.28);
-  max-width: 388px;
-  max-height: 255px;
-  padding: 2px; }
-
 @media screen and (min-width: 45em) {
-  #google-maps-layer .grommetux-layer--align-center.grommetux-layer--closeable:not(.grommetux-layer--hidden) .grommetux-layer__container {
-    background: transparent;
-    padding: 2px;
-    top: 0;
-    bottom: initial;
-    right: 0;
-    transform: none;
-    -webkit-transform: none;
-    padding: 0; }
-  #google-maps-layer > div {
-    padding: 0; }
-  #google-maps-layer .grommetux-layer .grommetux-layer__container {
-    padding: 0; }
-  #google-maps-layer .grommetux-button {
-    border: none;
-    margin: 0;
-    padding: 0; }
-    #google-maps-layer .grommetux-button:hover {
-      border: none;
-      padding: 0;
-      margin: 0; }
-  #google-maps-layer .grommetux-control-icon {
-    fill: white;
-    stroke: white; }
-    #google-maps-layer .grommetux-control-icon:hover {
-      fill: #e6e6e6;
-      stroke: #e6e6e6;
-      margin: 0;
-      padding: 0; }
   .image-expand-layer .grommetux-layer__container {
     padding: 0;
     padding-right: 50px;
@@ -465,10 +424,16 @@ circle {
 .round-location {
   animation: 1s linear animJelly; }
 
-#game-overview-layer:not(.grommetux-layer--hidden) ~ .grommetux-app {
+#game-summary-layer:not(.grommetux-layer--hidden) ~ .grommetux-app {
   height: calc(100vh + 25px);
   width: 100%;
   position: absolute; }
+
+.react-draggable {
+  position: fixed !important; }
+
+#header-play-button > span {
+  padding: 5px !important; }
 
 .dark-mode.grommet.grommetux-app {
   background: #141526;
@@ -691,7 +656,7 @@ circle {
   .round-info-box .round-location svg path {
     stroke: #6afff3 !important; }
 
-#game-overview-layer > div {
+#game-summary-layer > div {
   background: #141526;
   color: #686a83 !important; }
 
@@ -781,3 +746,7 @@ circle {
     color: #c6c6c6; }
     .light-mode .grommetux-button.disabled .grommetux-control-icon path {
       stroke: #c6c6c6 !important; }
+  .light-mode footer {
+    background: #F3F3F3; }
+    .light-mode footer .grommetux-paragraph {
+      color: #232426; }

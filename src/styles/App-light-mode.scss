@@ -58,4 +58,11 @@ $continent-map: (
       stroke: #c6c6c6 !important;
     }
   }
+
+  footer {
+    background: #F3F3F3;
+    .grommetux-paragraph {
+      color: #232426;
+    }
+  }
 }

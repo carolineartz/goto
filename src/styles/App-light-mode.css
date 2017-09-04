@@ -84,3 +84,7 @@
     color: #c6c6c6; }
     .light-mode .grommetux-button.disabled .grommetux-control-icon path {
       stroke: #c6c6c6 !important; }
+  .light-mode footer {
+    background: #F3F3F3; }
+    .light-mode footer .grommetux-paragraph {
+      color: #232426; }

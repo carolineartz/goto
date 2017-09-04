@@ -1,34 +1,62 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { StickyContainer, Sticky } from 'react-sticky';
 import '../node_modules/grommet-css';
 import './App.css';
 
-import { App } from './components/grommet';
+import { gamePlayAgain } from './actions/game';
 
+import { App as GApp } from './components/grommet';
+import GoogleMapsContainer from './components/containers/GoogleMapsContainer';
+import HeaderContainer from './components/containers/HeaderContainer';
+import ImageListContainer from './components/containers/ImageListContainer';
 import Hero from './components/Hero';
-import MyHeader from './components/Header';
-import Images from './components/Images';
-import MyFooter from './components/Footer';
-import GameOverview from './components/GameOverview';
+import Footer from './components/Footer';
+import GameSummaryOverlay from './components/GameSummaryOverlay';
 
-const MyApp = (props) => (
-  <App className={`${props.mode}-mode`} centered={false}>
-    <Hero />
-    <GameOverview />
+const App = ({
+  mode,
+  gameStarted,
+  rounds,
+  summaryIsShown,
+  score,
+  playAgain
+}) => (
+  <GApp className={`${mode}-mode`} centered={false}>
+    <Hero mode={mode} />
+    <GoogleMapsContainer mode={mode} />
+    <GameSummaryOverlay rounds={rounds} score={score} hidden={!summaryIsShown} onClickPlayAgain={playAgain} />
     <StickyContainer>
       <Sticky>
-        { ({style}) => <MyHeader style={style} /> }
+        { ({style}) => <HeaderContainer style={style} /> }
       </Sticky>
-      <Images />
-      <MyFooter />
+      { gameStarted && <ImageListContainer /> }
+      <Footer />
     </StickyContainer>
-  </App>
+  </GApp>
 );
 
+App.propTypes = {
+  mode: PropTypes.string.isRequired,
+  gameStarted: PropTypes.bool.isRequired,
+  rounds: PropTypes.array.isRequired,
+  summaryIsShown: PropTypes.bool.isRequired,
+  playAgain: PropTypes.func.isRequired,
+  score: PropTypes.number.isRequired
+};
+
 const select = (state, props) => ({
-  mode: state.app.mode
+  mode: state.app.mode,
+  gameStarted: state.game.started,
+  rounds: state.game.summaryIsShown ? state.round.all : [],
+  summaryIsShown: state.game.summaryIsShown,
+  score: state.game.totalScore
 });
 
-export default connect(select)(MyApp);
+const send = (dispatch) => ({
+  playAgain: () => dispatch(gamePlayAgain())
+});
+
+export default connect(select, send)(App);

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import app from './app';
 import images from './images';
-import rounds from './rounds';
+import round from './round';
+import game from './game';
 
-export default combineReducers({ app, images, rounds });
+export default combineReducers({ app, images, round, game });

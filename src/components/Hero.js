@@ -1,11 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Box } from './grommet';
 import DotMap from './DotMap';
 import ModeSwitcher from './ModeSwitcher';
 import Logo from './Logo';
 
-const Hero = (props) =>
+const Hero = ({mode}) =>
   <Box
     id="hero"
     full
@@ -19,11 +19,12 @@ const Hero = (props) =>
     size={{height: 'large'}}
   >
     <Box className="logo-main-container" justify="center" align="center" size="medium"><Logo /></Box>
-    <ModeSwitcher mode={props.mode} />
+    <ModeSwitcher mode={mode} />
     <Box flex="grow" size="large"><DotMap /></Box>
   </Box>;
 
-const select = (state, props) => ({
-  mode: state.app.mode
-});
-export default connect(select)(Hero);
+Hero.propTypes = {
+  mode: PropTypes.string.isRequired
+};
+
+export default Hero;

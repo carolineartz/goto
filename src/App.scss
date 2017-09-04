@@ -35,74 +35,74 @@ header {
   justify-content: center;
 }
 
-#google-maps-layer {
-  // &:not(.visible) {
-  //   opacity: 0;
-  // }
-  &.grommetux-layer--closeable:not(.grommetux-layer--hidden)~.grommet.grommetux-app--hidden {
-    position: static;
-  }
-} // #skip-link-layer.grommetux-layer--hidden, #google-maps-layer.grommetux-layer {
-//   background: transparent;
+// #google-maps-layer {
+//   &.grommetux-layer--closeable:not(.grommetux-layer--hidden)~.grommet.grommetux-app--hidden {
+//     position: static;
+//   }
+// }
+
+// #google-maps-layer.grommetux-layer {
 //   bottom: initial;
 //   left: calc(100vw - 388px);
-//   box-shadow: 1px 4px 9px 0px rgba(0,0,0,0.28);
-//   max-width: 388px;
-//   max-height: 255px;
+//   box-shadow: 1px 4px 9px 0px rgba(0, 0, 0, 0.28);
+//   width: 388px;
+//   max-height: 231px;
 //   padding: 2px;
 // }
-#google-maps-layer.grommetux-layer {
-  background: transparent;
-  bottom: initial;
-  left: calc(100vw - 388px);
-  box-shadow: 1px 4px 9px 0px rgba(0, 0, 0, 0.28);
-  max-width: 388px;
-  max-height: 255px;
-  padding: 2px;
-}
 
 @media screen and (min-width: 45em) {
-  #google-maps-layer {
-    .grommetux-layer--align-center.grommetux-layer--closeable:not(.grommetux-layer--hidden) .grommetux-layer__container {
-      background: transparent; // width: 100%;
-      // height: 100%;
-      padding: 2px;
-      top: 0;
-      bottom: initial;
-      right: 0;
-      transform: none;
-      -webkit-transform: none;
-      padding: 0;
-    }
+  // #google-maps-layer {
+  //   .grommetux-layer--align-center.grommetux-layer--closeable:not(.grommetux-layer--hidden) .grommetux-layer__container {
+  //     background: transparent;
+  //     padding: 2px;
+  //     top: 0;
+  //     bottom: initial;
+  //     right: 0;
+  //     transform: none;
+  //     -webkit-transform: none;
+  //     padding: 0;
+  //   }
 
-    > div {
-      padding: 0;
-    }
+  //   > div {
+  //     padding: 0;
+  //     width: 388px;
+  //   }
 
-    .grommetux-layer .grommetux-layer__container {
-      padding: 0;
-    }
-    .grommetux-button {
-      border: none;
-      margin: 0;
-      padding: 0;
-      &:hover {
-        border: none;
-        padding: 0;
-        margin: 0
-      }
-    }
-    .grommetux-control-icon {
-      fill: white;
-      stroke: white;
-      &:hover {
-        fill: darken(white, 10%);
-        stroke: darken(white, 10%);
-        margin: 0;
-        padding: 0;
-      }
-    }
-  }
+  //   > div.grommetux-layer__container {
+  //     max-height: 100% !important;
+  //   }
+
+  //   .map-container-element {
+  //     height: 255px;
+  //     > div {
+  //       overflow: visible !important;
+  //     }
+  //   }
+
+  //   .grommetux-layer .grommetux-layer__container {
+  //     padding: 0;
+  //   }
+  //   .grommetux-button {
+  //     border: none;
+  //     margin: 0;
+  //     padding: 0;
+  //     &:hover {
+  //       border: none;
+  //       padding: 0;
+  //       margin: 0
+  //     }
+  //   }
+  //   .grommetux-control-icon {
+  //     fill: white;
+  //     stroke: white;
+  //     &:hover {
+  //       fill: darken(white, 10%);
+  //       stroke: darken(white, 10%);
+  //       margin: 0;
+  //       padding: 0;
+  //     }
+  //   }
+  // }
 
   .image-expand-layer {
     .grommetux-layer__container {
@@ -158,19 +158,6 @@ header {
   }
 }
 
-// .logo-main-container {
-//   position: absolute;
-//   top: 260px;
-//   left: 50px;
-//   width: 200px;
-//   height: 200px;
-// }
-
-// .grommetux-button:not(.grommetux-button--box):not(.disabled):hover {
-//   border-width: 4px;
-//   margin: -2px;
-// }
-
 .grommetux-button.disabled:not(.grommetux-button--box) {
   cursor: default !important;
 }
@@ -190,10 +177,6 @@ circle {
 .delay-3 {
   animation-delay: 6s !important;
 }
-
-// #skip-link-layer.grommetux-layer--hidden {
-//   display: none;
-// }
 
 #mode-button {
   position: absolute;
@@ -309,15 +292,19 @@ circle {
 }
 
 
-#game-overview-layer:not(.grommetux-layer--hidden) ~ .grommetux-app {
+#game-summary-layer:not(.grommetux-layer--hidden) ~ .grommetux-app {
   height: calc(100vh + 25px);
   width: 100%;
   position: absolute;
 }
 
-// .gm-style div {
-//   height: 200px;
-//   width: 200px;
-// }
+.react-draggable {
+  position: fixed !important;
+}
+
+#header-play-button > span {
+  padding: 5px !important;
+}
+
 @import 'styles/App-dark-mode.scss';
 @import 'styles/App-light-mode.scss';

@@ -8,7 +8,7 @@ export default function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger()))
+    composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({collapsed: (getState, action, logEntry) => !logEntry.error})))
   );
 
   if (module.hot) {

@@ -27,6 +27,7 @@
     "react-google-maps": "^7.2.0",
     "react-masonry-component": "^5.0.7",
     "react-redux": "^5.0.6",
+    "react-rnd": "^5.1.2",
     "react-scripts": "1.0.11",
     "react-spinkit": "^3.0.0",
     "react-split-pane": "^0.1.66",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeAppMode, COLOR_MODE_MAP, DARK } from './../actions/app';
+import { appChangeMode, COLOR_MODE_MAP, DARK } from './../actions/app';
 
 import {Button, SVGIcon} from './grommet';
 
@@ -18,7 +18,7 @@ const SunIcon = ({fill}) => (
 const ModeSwitcherButton = ({ toMode, onClick }) => (
   <Button id="mode-button" icon={<SunIcon fill={COLOR_MODE_MAP[toMode]} />}
     onClick={() => {
-      onClick(); 
+      onClick();
     } }
     plain
   />
@@ -29,9 +29,7 @@ const select = (state, props) => ({
 });
 
 const send = (dispatch, props) =>  ({
-  onClick: () => {
-    dispatch(changeAppMode(props.mode)); 
-  }
+  onClick: () => dispatch(appChangeMode(props.mode))
 });
 
 export default connect(select, send)(ModeSwitcherButton);

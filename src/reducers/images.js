@@ -1,36 +1,21 @@
-import {
-  IMAGES_SET,
-  IMAGES_CLEAR,
-  IMAGE_PLACES_SET
-} from '../actions/images';
-
 import { createReducer } from './utils';
 
+import {
+  IMAGE_SELECT,
+  IMAGE_DESELECT,
+} from '../actions/images';
+
 const initialState = {
-  placeId: null,
-  images: [],
-  page: 0,
-  places: []
+  selectedSrc: undefined
 };
 
 const handlers = {
-  [IMAGE_PLACES_SET]: (state, action) => ({
-    places: action.places,
-    placeId: action.places[0].place_id
+  [IMAGE_SELECT]: (state, action) => ({
+    selectedSrc: action.imageSrc
   }),
 
-  [IMAGES_SET]: (state, action) => {
-    let images;
-    if (action.page === 0) images = action.images;
-    else images = [...state.images, ...action.images];
-    return {
-      images,
-      page: action.page
-    };
-  },
-
-  [IMAGES_CLEAR]: (state, action) => ({
-    ...initialState, places: state.places
+  [IMAGE_DESELECT]: (state, action) => ({
+    selectedSrc: undefined
   })
 };
 

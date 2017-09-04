@@ -14,4 +14,10 @@ export default Transis.Model.extend('Guess', function() {
       };
     }
   });
+
+  this.prototype.setCoorindates = function({latitude, longitude}) {
+    this.latitude = latitude;
+    this.longitude = longitude;
+    return this;
+  };
 });

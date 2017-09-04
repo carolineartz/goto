@@ -26,6 +26,9 @@ import CheckBox from 'grommet/components/CheckBox';
 import Notification from 'grommet/components/Notification';
 import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
+import Headline from 'grommet/components/Headline';
+import Spinning from 'grommet/components/icons/Spinning';
+
 
 import SVGIcon from 'grommet/components/SVGIcon';
 import PlayIcon from 'grommet/components/icons/base/Play';
@@ -40,6 +43,7 @@ import FormAddIcon from 'grommet/components/icons/base/FormAdd';
 // import RobotIcon from 'grommet/components/icons/base/Robot';
 
 export {
+  Spinning,
   PlayIcon,
   FormAddIcon,
   Notification,
@@ -50,6 +54,7 @@ export {
   Animate,
   Button,
   Tiles,
+  Headline,
   Tile,
   WorldMap,
   Layer,
