@@ -1,15 +1,17 @@
 import { createReducer } from './utils';
 
 import {
-  ROUND_CREATE,
-  ROUND_START_NEXT,
+  ROUND_ALL_CREATE_FAILURE,
+  ROUND_ALL_CREATE_SUCCESS,
+  ROUND_DECREASE_POSSIBLE_POINTS,
   ROUND_DROP_PIN,
-  ROUND_MAKE_GUESS,
-  ROUND_IMAGES_SET,
-  ROUND_RESET,
   ROUND_IMAGES_FETCH_FAILURE,
   ROUND_IMAGES_FETCH_SUCCESS,
-  ROUND_DECREASE_POSSIBLE_POINTS
+  ROUND_IMAGES_SET,
+  ROUND_IMAGES_SET_FAILURE,
+  ROUND_MAKE_GUESS,
+  ROUND_RESET,
+  ROUND_START_NEXT,
 } from '../actions/round';
 
 const initialState = {
@@ -26,8 +28,20 @@ const initialState = {
 };
 
 const handlers = {
-  [ROUND_CREATE]: (state, action) => ({
-    all: [...state.all, action.round]
+  [ROUND_ALL_CREATE_SUCCESS]: (state, action) => ({
+    all: action.rounds
+  }),
+
+  [ROUND_ALL_CREATE_FAILURE]: (state, action) => ({
+    error: action.error
+  }),
+
+  [ROUND_IMAGES_SET]: (state, action) => ({
+    ...state
+  }),
+
+  [ROUND_IMAGES_SET_FAILURE]: (state, action) => ({
+    error: action.error
   }),
 
   [ROUND_START_NEXT]: (state, action) => {
@@ -42,11 +56,6 @@ const handlers = {
       guessCoordinates: undefined
     };
   },
-
-  [ROUND_IMAGES_SET]: (state, action) => ({
-    countImagesSetForRounds: state.countImagesSetForRounds + 1,
-    allInitialImagesSet: state.countImagesSetForRounds === 4
-  }),
 
   [ROUND_DROP_PIN]: (state, action) => ({
     pinCoordinates: action.coordinates,

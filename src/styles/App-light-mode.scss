@@ -3,26 +3,44 @@
     @content;
   }
 }
+
+$light-gray: #F3F3F3;
 $dark-blue: #141526;
+$purple: #4c54a3;
+$red-orange: #fd5832;
+$turquoise: #23b9d1;
+$light-green: #9fd4c8;
+$orange: #ff8729;
+
 $continent-map: (
-  africa: #4c54a3,
-  asia: #fd5832,
-  austrailia: #23b9d1,
-  europe: #9fd4c8,
-  northAmerica: #ff8729,
-  southAmerica: #23b9d1
+  africa: $purple,
+  asia: $red-orange,
+  austrailia: $turquoise,
+  europe: $light-green,
+  northAmerica: $orange,
+  southAmerica: $turquoise
 ) !default;
 
 .light-mode {
   &.grommet.grommetux-app {
     color: $dark-blue;
   }
-  header { background: white; }
+  header {
+    background: white;
+  }
 
-  .logo-letters path, .logo-letters polygon { fill: $dark-blue; }
-  .logo-pin { fill: #fd5832; }
+  .logo-letters path,
+  .logo-letters polygon {
+    fill: $dark-blue;
+  }
 
-  header: { background: white; }
+  .logo-pin {
+    fill: $red-orange;
+  }
+
+  header: {
+    background: white;
+  }
 
   .grommet img {
     border: 1px solid #e6e6e6;
@@ -36,7 +54,8 @@ $continent-map: (
     0 0 $b ($s + $sm) $c;
   }
 
-  @each $continent, $color in $continent-map {
+  @each $continent,
+  $color in $continent-map {
     $i: index($continent-map, ($continent $color));
     .#{$continent}.ripple {
       background-color: lighten($color, 5%);
@@ -44,9 +63,15 @@ $continent-map: (
     }
 
     @include keyframes(#{$continent}-light) {
-      0% { @include shadow(0px, 0px, 0px, rgba($color, 0)); }
-      10% { @include shadow(12px, 10px, 4px, $color); }
-      100% { @include shadow(0px, 40px, 0px, rgba($color, 0)); }
+      0% {
+        @include shadow(0px, 0px, 0px, rgba($color, 0));
+      }
+      10% {
+        @include shadow(12px, 10px, 4px, $color);
+      }
+      100% {
+        @include shadow(0px, 40px, 0px, rgba($color, 0));
+      }
     }
   }
 
@@ -57,12 +82,85 @@ $continent-map: (
     .grommetux-control-icon path {
       stroke: #c6c6c6 !important;
     }
+    &:hover {
+      box-shadow: none;
+      color: #c6c6c6;
+    }
+  }
+
+  .grommetux-button {
+    border-color: $purple;
+
+    &:hover {
+      box-shadow: 0px 0px 0px 2px $purple;
+      color: $dark-blue;
+      .grommetux-control-icon {
+        fill: $dark-blue;
+        stroke: $dark-blue;
+      }
+    }
+
+    &__accent-2 {
+      border-color: $purple;
+      &:hover {
+        box-shadow: 0px 0px 0px 2px $purple;
+      }
+    }
+
+    &--accent {
+      border-color: $turquoise;
+      &:hover {
+        box-shadow: 0px 0px 0px 2px $turquoise;
+      }
+    }
+
+    &__accent-3 {
+      border-color: $red-orange;
+      &:hover {
+        box-shadow: 0px 0px 0px 2px $red-orange;
+      }
+    }
+
+    &--more {
+      $start-color: #B3FF5A;
+
+      @for $i from 1 through 10 {
+        &[data-value="#{110 - ($i * 10)}"] {
+          $color: adjust-color($start-color, $blue: -$i*25, $red: $i*25, $green: -14*$i);
+          border-color: $color;
+          &:hover {
+            box-shadow: 0px 0px 0px 2px $color;
+          }
+        }
+      }
+    }
   }
 
   footer {
     background: #F3F3F3;
     .grommetux-paragraph {
       color: #232426;
+    }
+  }
+  .round-info-box {
+    .round-score {
+      background: $red-orange;
+      color: white;
+      svg path {
+        stroke: white !important;
+      }
+    }
+
+    .round-location {
+      background: white;
+      border: 3px solid $red-orange;
+      color: $red-orange;
+      .grommetux-value__label {
+        color: $dark-blue;
+      }
+      svg path {
+        stroke: $red-orange !important;
+      }
     }
   }
 }

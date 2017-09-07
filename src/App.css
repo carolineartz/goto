@@ -4,9 +4,6 @@ body {
 a[title="Interactive JavaScript maps"], g[cursor="pointer"] {
   display: none !important; }
 
-div[id^="__AmCharts"] path[stroke="#FFFFFF"] {
-  stroke: #141526 !important; }
-
 #root {
   position: relative; }
 
@@ -20,15 +17,21 @@ header {
   position: static;
   overflow: hidden; }
 
+.grommetux-box--focus, .grommetux-button--focus {
+  border: none;
+  box-shadow: none; }
+
 .grommetux-tiles--fill.grommetux-box--wrap > .grommetux-tile {
   justify-content: center; }
+
+.image-expand-layer .grommetux-layer__container {
+  background: transparent;
+  box-shadow: none !important; }
 
 @media screen and (min-width: 45em) {
   .image-expand-layer .grommetux-layer__container {
     padding: 0;
-    padding-right: 50px;
-    background: transparent;
-    box-shadow: 1px 4px 9px 0px rgba(0, 0, 0, 0.28); }
+    padding-right: 50px; }
   .image-expand-layer button .grommetux-control-icon {
     fill: #bcbecb;
     stroke: #bcbecb; }
@@ -242,7 +245,20 @@ circle {
   position: fixed !important; }
 
 #header-play-button > span {
-  padding: 5px !important; }
+  padding: 6px 5px !important; }
+  #header-play-button > span > div {
+    display: inline-block; }
+  #header-play-button > span .sk-double-bounce > div {
+    top: 2px; }
+
+#game-summary-layer .summary-score .grommetux-value__value {
+  color: #23b9d1; }
+
+#game-summary-layer .summary-location svg path {
+  stroke: #fd5832; }
+
+.grommetux-button__icon {
+  display: inline; }
 
 .dark-mode.grommet.grommetux-app {
   background: #141526;
@@ -452,24 +468,28 @@ circle {
       fill: #505164;
       stroke: #505164; }
 
-.round-info-box .round-score {
+.dark-mode .round-info-box .round-score {
   background: #fd5832;
   color: #05060A; }
-  .round-info-box .round-score svg path {
+  .dark-mode .round-info-box .round-score svg path {
     stroke: #05060A !important; }
 
-.round-info-box .round-location {
+.dark-mode .round-info-box .round-location {
   background: #141526;
   border: 3px solid #fd5832;
   color: #fd5832; }
-  .round-info-box .round-location .grommetux-value__label {
+  .dark-mode .round-info-box .round-location .grommetux-value__label {
     color: #9193a8; }
-  .round-info-box .round-location svg path {
+  .dark-mode .round-info-box .round-location svg path {
     stroke: #fd5832 !important; }
 
-#game-summary-layer > div {
+#game-summary-layer.dark-mode > div,
+#game-overview-layer.dark-mode > div {
   background: #141526;
   color: #686a83 !important; }
+
+#game-summary-layer.dark-mode div[id^="__AmCharts"] path[stroke="#FFFFFF"] {
+  stroke: #141526 !important; }
 
 .light-mode {
   header-background: white; }
@@ -477,7 +497,8 @@ circle {
     color: #141526; }
   .light-mode header {
     background: white; }
-  .light-mode .logo-letters path, .light-mode .logo-letters polygon {
+  .light-mode .logo-letters path,
+  .light-mode .logo-letters polygon {
     fill: #141526; }
   .light-mode .logo-pin {
     fill: #fd5832; }
@@ -557,7 +578,83 @@ circle {
     color: #c6c6c6; }
     .light-mode .grommetux-button.disabled .grommetux-control-icon path {
       stroke: #c6c6c6 !important; }
+    .light-mode .grommetux-button.disabled:hover {
+      box-shadow: none;
+      color: #c6c6c6; }
+  .light-mode .grommetux-button {
+    border-color: #4c54a3; }
+    .light-mode .grommetux-button:hover {
+      box-shadow: 0px 0px 0px 2px #4c54a3;
+      color: #141526; }
+      .light-mode .grommetux-button:hover .grommetux-control-icon {
+        fill: #141526;
+        stroke: #141526; }
+    .light-mode .grommetux-button__accent-2 {
+      border-color: #4c54a3; }
+      .light-mode .grommetux-button__accent-2:hover {
+        box-shadow: 0px 0px 0px 2px #4c54a3; }
+    .light-mode .grommetux-button--accent {
+      border-color: #23b9d1; }
+      .light-mode .grommetux-button--accent:hover {
+        box-shadow: 0px 0px 0px 2px #23b9d1; }
+    .light-mode .grommetux-button__accent-3 {
+      border-color: #fd5832; }
+      .light-mode .grommetux-button__accent-3:hover {
+        box-shadow: 0px 0px 0px 2px #fd5832; }
+    .light-mode .grommetux-button--more[data-value="100"] {
+      border-color: #ccf141; }
+      .light-mode .grommetux-button--more[data-value="100"]:hover {
+        box-shadow: 0px 0px 0px 2px #ccf141; }
+    .light-mode .grommetux-button--more[data-value="90"] {
+      border-color: #e5e328; }
+      .light-mode .grommetux-button--more[data-value="90"]:hover {
+        box-shadow: 0px 0px 0px 2px #e5e328; }
+    .light-mode .grommetux-button--more[data-value="80"] {
+      border-color: #fed50f; }
+      .light-mode .grommetux-button--more[data-value="80"]:hover {
+        box-shadow: 0px 0px 0px 2px #fed50f; }
+    .light-mode .grommetux-button--more[data-value="70"] {
+      border-color: #ffc700; }
+      .light-mode .grommetux-button--more[data-value="70"]:hover {
+        box-shadow: 0px 0px 0px 2px #ffc700; }
+    .light-mode .grommetux-button--more[data-value="60"] {
+      border-color: #ffb900; }
+      .light-mode .grommetux-button--more[data-value="60"]:hover {
+        box-shadow: 0px 0px 0px 2px #ffb900; }
+    .light-mode .grommetux-button--more[data-value="50"] {
+      border-color: #ffab00; }
+      .light-mode .grommetux-button--more[data-value="50"]:hover {
+        box-shadow: 0px 0px 0px 2px #ffab00; }
+    .light-mode .grommetux-button--more[data-value="40"] {
+      border-color: #ff9d00; }
+      .light-mode .grommetux-button--more[data-value="40"]:hover {
+        box-shadow: 0px 0px 0px 2px #ff9d00; }
+    .light-mode .grommetux-button--more[data-value="30"] {
+      border-color: #ff8f00; }
+      .light-mode .grommetux-button--more[data-value="30"]:hover {
+        box-shadow: 0px 0px 0px 2px #ff8f00; }
+    .light-mode .grommetux-button--more[data-value="20"] {
+      border-color: #ff8100; }
+      .light-mode .grommetux-button--more[data-value="20"]:hover {
+        box-shadow: 0px 0px 0px 2px #ff8100; }
+    .light-mode .grommetux-button--more[data-value="10"] {
+      border-color: #ff7300; }
+      .light-mode .grommetux-button--more[data-value="10"]:hover {
+        box-shadow: 0px 0px 0px 2px #ff7300; }
   .light-mode footer {
     background: #F3F3F3; }
     .light-mode footer .grommetux-paragraph {
       color: #232426; }
+  .light-mode .round-info-box .round-score {
+    background: #fd5832;
+    color: white; }
+    .light-mode .round-info-box .round-score svg path {
+      stroke: white !important; }
+  .light-mode .round-info-box .round-location {
+    background: white;
+    border: 3px solid #fd5832;
+    color: #fd5832; }
+    .light-mode .round-info-box .round-location .grommetux-value__label {
+      color: #141526; }
+    .light-mode .round-info-box .round-location svg path {
+      stroke: #fd5832 !important; }

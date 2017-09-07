@@ -4,7 +4,8 @@
     color: #141526; }
   .light-mode header {
     background: white; }
-  .light-mode .logo-letters path, .light-mode .logo-letters polygon {
+  .light-mode .logo-letters path,
+  .light-mode .logo-letters polygon {
     fill: #141526; }
   .light-mode .logo-pin {
     fill: #fd5832; }
@@ -84,7 +85,83 @@
     color: #c6c6c6; }
     .light-mode .grommetux-button.disabled .grommetux-control-icon path {
       stroke: #c6c6c6 !important; }
+    .light-mode .grommetux-button.disabled:hover {
+      box-shadow: none;
+      color: #c6c6c6; }
+  .light-mode .grommetux-button {
+    border-color: #4c54a3; }
+    .light-mode .grommetux-button:hover {
+      box-shadow: 0px 0px 0px 2px #4c54a3;
+      color: #141526; }
+      .light-mode .grommetux-button:hover .grommetux-control-icon {
+        fill: #141526;
+        stroke: #141526; }
+    .light-mode .grommetux-button__accent-2 {
+      border-color: #4c54a3; }
+      .light-mode .grommetux-button__accent-2:hover {
+        box-shadow: 0px 0px 0px 2px #4c54a3; }
+    .light-mode .grommetux-button--accent {
+      border-color: #23b9d1; }
+      .light-mode .grommetux-button--accent:hover {
+        box-shadow: 0px 0px 0px 2px #23b9d1; }
+    .light-mode .grommetux-button__accent-3 {
+      border-color: #fd5832; }
+      .light-mode .grommetux-button__accent-3:hover {
+        box-shadow: 0px 0px 0px 2px #fd5832; }
+    .light-mode .grommetux-button--more[data-value="100"] {
+      border-color: #ccf141; }
+      .light-mode .grommetux-button--more[data-value="100"]:hover {
+        box-shadow: 0px 0px 0px 2px #ccf141; }
+    .light-mode .grommetux-button--more[data-value="90"] {
+      border-color: #e5e328; }
+      .light-mode .grommetux-button--more[data-value="90"]:hover {
+        box-shadow: 0px 0px 0px 2px #e5e328; }
+    .light-mode .grommetux-button--more[data-value="80"] {
+      border-color: #fed50f; }
+      .light-mode .grommetux-button--more[data-value="80"]:hover {
+        box-shadow: 0px 0px 0px 2px #fed50f; }
+    .light-mode .grommetux-button--more[data-value="70"] {
+      border-color: #ffc700; }
+      .light-mode .grommetux-button--more[data-value="70"]:hover {
+        box-shadow: 0px 0px 0px 2px #ffc700; }
+    .light-mode .grommetux-button--more[data-value="60"] {
+      border-color: #ffb900; }
+      .light-mode .grommetux-button--more[data-value="60"]:hover {
+        box-shadow: 0px 0px 0px 2px #ffb900; }
+    .light-mode .grommetux-button--more[data-value="50"] {
+      border-color: #ffab00; }
+      .light-mode .grommetux-button--more[data-value="50"]:hover {
+        box-shadow: 0px 0px 0px 2px #ffab00; }
+    .light-mode .grommetux-button--more[data-value="40"] {
+      border-color: #ff9d00; }
+      .light-mode .grommetux-button--more[data-value="40"]:hover {
+        box-shadow: 0px 0px 0px 2px #ff9d00; }
+    .light-mode .grommetux-button--more[data-value="30"] {
+      border-color: #ff8f00; }
+      .light-mode .grommetux-button--more[data-value="30"]:hover {
+        box-shadow: 0px 0px 0px 2px #ff8f00; }
+    .light-mode .grommetux-button--more[data-value="20"] {
+      border-color: #ff8100; }
+      .light-mode .grommetux-button--more[data-value="20"]:hover {
+        box-shadow: 0px 0px 0px 2px #ff8100; }
+    .light-mode .grommetux-button--more[data-value="10"] {
+      border-color: #ff7300; }
+      .light-mode .grommetux-button--more[data-value="10"]:hover {
+        box-shadow: 0px 0px 0px 2px #ff7300; }
   .light-mode footer {
     background: #F3F3F3; }
     .light-mode footer .grommetux-paragraph {
       color: #232426; }
+  .light-mode .round-info-box .round-score {
+    background: #fd5832;
+    color: white; }
+    .light-mode .round-info-box .round-score svg path {
+      stroke: white !important; }
+  .light-mode .round-info-box .round-location {
+    background: white;
+    border: 3px solid #fd5832;
+    color: #fd5832; }
+    .light-mode .round-info-box .round-location .grommetux-value__label {
+      color: #141526; }
+    .light-mode .round-info-box .round-location svg path {
+      stroke: #fd5832 !important; }

@@ -206,21 +206,25 @@
       fill: #505164;
       stroke: #505164; }
 
-.round-info-box .round-score {
+.dark-mode .round-info-box .round-score {
   background: #fd5832;
   color: #05060A; }
-  .round-info-box .round-score svg path {
+  .dark-mode .round-info-box .round-score svg path {
     stroke: #05060A !important; }
 
-.round-info-box .round-location {
+.dark-mode .round-info-box .round-location {
   background: #141526;
   border: 3px solid #fd5832;
   color: #fd5832; }
-  .round-info-box .round-location .grommetux-value__label {
+  .dark-mode .round-info-box .round-location .grommetux-value__label {
     color: #9193a8; }
-  .round-info-box .round-location svg path {
+  .dark-mode .round-info-box .round-location svg path {
     stroke: #fd5832 !important; }
 
-#game-summary-layer > div {
+#game-summary-layer.dark-mode > div,
+#game-overview-layer.dark-mode > div {
   background: #141526;
   color: #686a83 !important; }
+
+#game-summary-layer.dark-mode div[id^="__AmCharts"] path[stroke="#FFFFFF"] {
+  stroke: #141526 !important; }

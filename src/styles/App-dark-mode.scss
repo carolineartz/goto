@@ -29,13 +29,21 @@ $purple-4: #593a7e;
 
 $dark-mode-primary: $dark-blue;
 
+$light-gray: #F3F3F3;
+$dark-blue: #141526;
+$purple: #4c54a3;
+$red-orange: #fd5832;
+$turquoise: #23b9d1;
+$light-green: #9fd4c8;
+$orange: #ff8729;
+
 $continent-map: (
-  africa: #4c54a3,
-  asia: #fd5832,
-  austrailia: #23b9d1,
-  europe: #9fd4c8,
-  northAmerica: #ff8729,
-  southAmerica: #23b9d1
+  africa: $purple,
+  asia: $red-orange,
+  austrailia: $turquoise,
+  europe: $light-green,
+  northAmerica: $orange,
+  southAmerica: $turquoise
 ) !default;
 
 .dark-mode {
@@ -59,7 +67,7 @@ $continent-map: (
   }
 
   .logo-letters path, .logo-letters polygon { fill: #505164; }
-  .logo-pin { fill: #fd5832; }
+  .logo-pin { fill: $red-orange; }
 
   @mixin shadow($b, $s, $sm, $c) {
     box-shadow: 0 0 8px 6px $c,
@@ -139,9 +147,9 @@ $continent-map: (
     }
 
     &__accent-3 {
-      border-color: #fd5832;
+      border-color: $red-orange;
       &:hover {
-        box-shadow: 0px 0px 0px 2px #fd5832;
+        box-shadow: 0px 0px 0px 2px $red-orange;
       }
     }
 
@@ -172,31 +180,43 @@ $continent-map: (
       }
     }
   }
-}
+  .round-info-box {
+    .round-score {
+      background: $red-orange;
+      color: $blackish;
+      svg path {
+        stroke: $blackish !important;
+      }
+    }
 
-.round-info-box {
-  .round-score {
-    background: #fd5832;
-    color: $blackish;
-    svg path {
-      stroke: $blackish !important;
+    .round-location {
+      background: $dark-blue;
+      border: 3px solid $red-orange;
+      color: $red-orange;
+      .grommetux-value__label {
+        color: $neutral-1;
+      }
+      svg path {
+        stroke: $red-orange !important;
+      }
     }
   }
+}
 
-  .round-location {
+
+#game-summary-layer.dark-mode,
+#game-overview-layer.dark-mode {
+  > div {
     background: $dark-blue;
-    border: 3px solid #fd5832;
-    color: #fd5832;
-    .grommetux-value__label {
-      color: $neutral-1;
-    }
-    svg path {
-      stroke: #fd5832!important;
+    color:  $neutral-2 !important;
+  }
+}
+
+#game-summary-layer.dark-mode {
+  div[id^="__AmCharts"] path {
+    &[stroke="#FFFFFF"] {
+      stroke: #141526 !important;
     }
   }
 }
 
-#game-summary-layer > div {
-  background: $dark-blue;
-  color:  $neutral-2 !important;
-}

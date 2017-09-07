@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
   gameCreate,
   gameStart,
-  gameOverviewDisplay,
+  gameShowOverview,
   gameToggleMap,
   gameShowSummary
 } from './../../actions/game';
@@ -32,7 +32,7 @@ class HeaderContainer extends Component {
         hasStarted={this.props.hasStarted}
         mapIsShown={this.props.mapIsShown}
         onClickNextRound={() => this.props.startNextRound({round: this.props.currentRound})}
-        onClickOverview={() => this.props.showOverview()}
+        onClickShowOverview={() => this.props.showOverview()}
         onClickPlay={() => this.props.startGame()}
         onClickShowSummary={() => this.props.showSummary()}
         onClickSubmitGuess={() => this.props.hasPin ? this.props.makeGuess(this.props.currentRound, this.props.pinCoordinates) : null }
@@ -70,7 +70,7 @@ HeaderContainer.propTypes = {
 const select = (state, ownProps) => ({
   currentRound: state.round.current,
   gameIsComplete: state.game.completed,
-  gameReady: state.round.allInitialImagesSet,
+  gameReady: state.game.created,
   hasPin: !!state.round.pinCoordinates,
   hasStarted: state.game.started,
   mapIsShown: state.game.mapIsShown,
@@ -83,7 +83,7 @@ const select = (state, ownProps) => ({
 const send = (dispatch) => ({
   createGame: () => dispatch(gameCreate()),
   makeGuess: (round, coordinates) => dispatch(roundMakeGuess(round, coordinates)),
-  showOverview: () => dispatch(gameOverviewDisplay()),
+  showOverview: () => dispatch(gameShowOverview()),
   showSummary: () => dispatch(gameShowSummary()),
   startGame: () => dispatch(gameStart()),
   startNextRound: ({round}) => dispatch(roundStartNext(round)),

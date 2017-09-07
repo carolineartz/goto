@@ -60,7 +60,7 @@ export default Transis.Model.extend('Round', function() {
 
   this.prototype.addImages = function(images) {
     this.images = [...this.images, ...images];
-    return this.images;
+    return this;
   };
 
   this.prototype.reducePossiblePoints = function(by = 10) {

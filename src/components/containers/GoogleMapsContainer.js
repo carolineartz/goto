@@ -34,7 +34,7 @@ const GoogleMapsContainer = ({
           default={{ x: window.innerWidth - 420, y: window.innerHeight - 300, width: 420, height: 300}}
           z={3}
           style={{
-            backgroundColor: '#05060a',
+            backgroundColor: mode === 'dark' ? '#05060a' : '#f3f3f3',
             display: 'block',
             boxShadow: '0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1)',
             padding: '.25rem'

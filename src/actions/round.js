@@ -4,19 +4,30 @@ import {
   gameComplete
 } from './game';
 
-import { fetchImages } from './Api';
+import { getRoundImages } from './Api';
 
-export const ROUND_CREATE = 'ROUND_CREATE';
 export const ROUND_IMAGES_FETCH_FAILURE = 'ROUND_IMAGES_FETCH_FAILURE';
 export const ROUND_START_NEXT = 'ROUND_START_NEXT';
 export const ROUND_DROP_PIN = 'ROUND_DROP_PIN';
 export const ROUND_MAKE_GUESS = 'ROUND_MAKE_GUESS';
 export const ROUND_IMAGES_SET = 'ROUND_IMAGES_SET';
-export const ROUND_UPDATE_GUESS = 'ROUND_UPDATE_GUESS';
+export const ROUND_IMAGES_SET_FAILURE = 'ROUND_IMAGES_SET_FAILURE';
 export const ROUND_RESET = 'ROUND_RESET';
 export const ROUND_IMAGES_LOAD_MORE = 'ROUND_IMAGES_LOAD_MORE';
 export const ROUND_IMAGES_FETCH_SUCCESS = 'ROUND_IMAGES_FETCH_SUCCESS';
 export const ROUND_DECREASE_POSSIBLE_POINTS = 'ROUND_DECREASE_POSSIBLE_POINTS';
+export const ROUND_ALL_CREATE_SUCCESS = 'ROUND_ALL_CREATE_SUCCESS';
+export const ROUND_ALL_CREATE_FAILURE = 'ROUND_ALL_CREATE_FAILURE';
+
+export const roundAllCreateSuccess = (rounds) => ({
+  type: ROUND_ALL_CREATE_SUCCESS,
+  rounds
+});
+
+export const roundAllCreateFailure = (error) => ({
+  type: ROUND_ALL_CREATE_FAILURE,
+  error
+});
 
 export const roundImagesSet = (round, images) => ({
   type: ROUND_IMAGES_SET,
@@ -24,7 +35,12 @@ export const roundImagesSet = (round, images) => ({
   images: round.images
 });
 
-export const roundImagesFetchSucess = (round, images) => ({
+export const roundImagesSetFailure = (error) => ({
+  type: ROUND_IMAGES_SET_FAILURE,
+  error
+});
+
+export const roundImagesFetchSuccess = (round, images) => ({
   type: ROUND_IMAGES_FETCH_SUCCESS,
   round,
   images
@@ -33,11 +49,6 @@ export const roundImagesFetchSucess = (round, images) => ({
 export const roundImagesFetchFailure = (error) => ({
   type: ROUND_IMAGES_FETCH_FAILURE,
   error
-});
-
-export const roundCreate = (round) => ({
-  type: ROUND_CREATE,
-  round
 });
 
 export const roundDropPin = (event) => ({
@@ -52,47 +63,36 @@ export const roundReset = () => ({
   type: ROUND_RESET
 });
 
-export const roundDecreasePossiblePoints = (round, possiblePoints) => ({
-  type: ROUND_DECREASE_POSSIBLE_POINTS,
-  round,
-  possiblePoints
-});
-
-const _roundImagesLoadMore = (round) => ({
-  type: ROUND_IMAGES_LOAD_MORE,
-  round
-});
-
-const _roundStartNext = (round) => ({
-  type: ROUND_START_NEXT,
-  currentRound: round
-});
-
-const _roundMakeGuess = (round) => ({
-  type: ROUND_MAKE_GUESS,
-  round
-});
-
 export const roundImagesLoadMore = (round) =>
-  (dispatch) => (
-    Promise.all([
-      Promise.resolve(dispatch(_roundImagesLoadMore(round))),
-      Promise.resolve(dispatch(roundDecreasePossiblePoints(round, round.reducePossiblePoints())))
-    ]).then(() =>
-      fetchImages(round.placeId, 5, round.nextPageImagesNumber)
-    ).then(images => dispatch(roundImagesFetchSucess(round, round.addImages(images) && images)))
-      .catch(e =>  dispatch(roundImagesFetchFailure(e)))
-  );
-
-export const roundStartNext = (round) =>
-  (dispatch) => {
-    dispatch(gameHideMap());
-    return dispatch(_roundStartNext(round));
-  };
+  (dispatch, getState) =>
+    getRoundImages(dispatch, round, 5, round.nextPageImagesNumber)
+      .then(images => {
+        dispatch({
+          type: ROUND_IMAGES_LOAD_MORE,
+          round: round.addImages(images)
+        });
+        return dispatch({
+          type: ROUND_DECREASE_POSSIBLE_POINTS,
+          round,
+          possiblePoints: round.reducePossiblePoints()
+        });
+      });
 
 export const roundMakeGuess = (round, coordinates) =>
   (dispatch, getState) => {
-    dispatch(_roundMakeGuess(round.setGuessCoordinates(coordinates)));
-    dispatch(gameUpdateTotalScore(getState().round.current.score));
-    if (round.number === 5) dispatch(gameComplete());
+    dispatch({
+      type: ROUND_MAKE_GUESS,
+      round: round.setGuessCoordinates(coordinates)
+    });
+    if (round.number === getState().game.numRounds) dispatch(gameComplete());
+    return dispatch(gameUpdateTotalScore(getState().round.current.score));
+  };
+
+export const roundStartNext = (round) =>
+  (dispatch, getState) => {
+    if (getState().game.mapIsShown) dispatch(gameHideMap());
+    return dispatch({
+      type: ROUND_START_NEXT,
+      currentRound: round
+    });
   };

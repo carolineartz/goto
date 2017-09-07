@@ -4,67 +4,64 @@ import PropTypes from 'prop-types';
 import AmCharts from '@amcharts/amcharts3-react';
 import { makeMap } from './../data/ammapsData';
 
-import { Box, Layer, List, ListItem, Value, LocationIcon, Meter, Label, Heading, Button, PlayIcon } from './grommet';
+import { Box, Layer, List, ListItem, Value, LocationIcon, Meter, Label, Button } from './grommet';
 
-const GameSummaryOverlay = ({hidden, score, rounds, onClickPlayAgain}) =>
+const GameSummaryOverlay = ({hidden, score, rounds, onClickPlayAgain, mode}) =>
   <Layer
     hidden={hidden}
     id="game-summary-layer"
+    className={mode === 'dark' ? 'dark-mode' : 'light-mode'}
   >
-    <Box pad="medium" full>
+    <Box pad="small" full>
       <List>
-        <ListItem>
-          <Box>
-            <Box><Heading tag="h1">You Scored a Total of {score} Points!</Heading></Box>
-            <Box direction="row">
-              <Box>
-                <Value value={score}
-                  units='points'
-                  size='medium'
-                  align='start' />
-                <Meter size='medium' value={(score/500) * 100} />
-                <Box direction='row'
-                  justify='between'
-                  pad={{between: 'small'}}
-                  responsive={false}>
-                  <Label size='small'>
-                    0
-                  </Label>
-                  <Label size='small'>
-                    500
-                  </Label>
-                </Box>
-              </Box>
-              <Box>
-                <Button
-                  onClick={onClickPlayAgain}
-                  style={{width: '188px'}}
-                  className="grommetux-button__accent-3"
-                  icon={<PlayIcon />}
-                  label='Play Again'
-                />
-              </Box>
+        <ListItem pad="small" alignSelf="center" alignContent="center" justify="center" align="center">
+          <Box pad={{horizontal: 'large', vertical: 'small'}}>
+            <Value value={score}
+              className='summary-total-score'
+              units='points'
+              size='medium'
+              align='start' />
+            <Meter size='medium' value={(score/500) * 100} />
+            <Box direction='row'
+              justify='between'
+              pad={{between: 'small'}}
+              responsive={false}>
+              <Label size='small'>
+                0
+              </Label>
+              <Label size='small'>
+                500
+              </Label>
             </Box>
+          </Box>
+          <Box pad={{horizontal: 'medium', vertical: 'small'}}>
+            <Button
+              onClick={onClickPlayAgain}
+              style={{width: '188px'}}
+              className="grommetux-button__accent-3"
+              label='Exit'
+            />
           </Box>
         </ListItem>
         { rounds.map((round, i) =>
           <ListItem key={`roundSummary-${i}`} justify='between'>
             <Value value={round.score}
               label={`Round ${round.number}`}
+              className="summary-score"
               units='points'
               size='medium' />
             <Value value={round.distance}
-              icon={<LocationIcon />}
+              className='summary-location'
+              icon={<LocationIcon size='small' />}
               label={round.placeName}
               units='mi'
-              responsive
               size='medium'
-              align='start'
             />
-            <Box id={`round${i+1}-map`}>
+            <Box pad="small" id={`round${i+1}-map`}>
               <AmCharts.React
                 style={{width: '500px', height: '300px'}}
                 options={makeMap({
+                  mode,
                   elementId: `round${round.number}-map`,
                   placeCoordinates: round.placeCoordinates,
                   guessCoordinates: round.guessCoordinates,
@@ -83,6 +80,7 @@ GameSummaryOverlay.propTypes = {
   onClickPlayAgain: PropTypes.func.isRequired,
   rounds: PropTypes.array.isRequired,
   score: PropTypes.number.isRequired,
+  mode: PropTypes.string.isRequired,
 };
 
 export default GameSummaryOverlay;

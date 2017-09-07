@@ -1,15 +1,17 @@
+$light-gray: #F3F3F3;
+$dark-blue: #141526;
+$purple: #4c54a3;
+$red-orange: #fd5832;
+$turquoise: #23b9d1;
+$light-green: #9fd4c8;
+$orange: #ff8729;
+
 body {
   margin-top: -25px;
 }
 
 a[title="Interactive JavaScript maps"], g[cursor="pointer"] {
   display: none !important;
-}
-
-div[id^="__AmCharts"] path {
-  &[stroke="#FFFFFF"] {
-    stroke: #141526 !important;
-  }
 }
 
 #root {
@@ -30,85 +32,25 @@ header {
   overflow: hidden;
 }
 
+.grommetux-box--focus, .grommetux-button--focus {
+  border: none;
+  box-shadow: none;
+}
+
 .grommetux-tiles--fill.grommetux-box--wrap>.grommetux-tile {
   justify-content: center;
 }
 
-// #google-maps-layer {
-//   &.grommetux-layer--closeable:not(.grommetux-layer--hidden)~.grommet.grommetux-app--hidden {
-//     position: static;
-//   }
-// }
-
-// #google-maps-layer.grommetux-layer {
-//   bottom: initial;
-//   left: calc(100vw - 388px);
-//   box-shadow: 1px 4px 9px 0px rgba(0, 0, 0, 0.28);
-//   width: 388px;
-//   max-height: 231px;
-//   padding: 2px;
-// }
+.image-expand-layer .grommetux-layer__container {
+  background: transparent;
+  box-shadow: none !important;
+}
 
 @media screen and (min-width: 45em) {
-  // #google-maps-layer {
-  //   .grommetux-layer--align-center.grommetux-layer--closeable:not(.grommetux-layer--hidden) .grommetux-layer__container {
-  //     background: transparent;
-  //     padding: 2px;
-  //     top: 0;
-  //     bottom: initial;
-  //     right: 0;
-  //     transform: none;
-  //     -webkit-transform: none;
-  //     padding: 0;
-  //   }
-
-  //   > div {
-  //     padding: 0;
-  //     width: 388px;
-  //   }
-
-  //   > div.grommetux-layer__container {
-  //     max-height: 100% !important;
-  //   }
-
-  //   .map-container-element {
-  //     height: 255px;
-  //     > div {
-  //       overflow: visible !important;
-  //     }
-  //   }
-
-  //   .grommetux-layer .grommetux-layer__container {
-  //     padding: 0;
-  //   }
-  //   .grommetux-button {
-  //     border: none;
-  //     margin: 0;
-  //     padding: 0;
-  //     &:hover {
-  //       border: none;
-  //       padding: 0;
-  //       margin: 0
-  //     }
-  //   }
-  //   .grommetux-control-icon {
-  //     fill: white;
-  //     stroke: white;
-  //     &:hover {
-  //       fill: darken(white, 10%);
-  //       stroke: darken(white, 10%);
-  //       margin: 0;
-  //       padding: 0;
-  //     }
-  //   }
-  // }
-
   .image-expand-layer {
     .grommetux-layer__container {
       padding: 0;
       padding-right: 50px;
-      background: transparent;
-      box-shadow: 1px 4px 9px 0px rgba(0, 0, 0, 0.28);
     }
 
     button {
@@ -302,7 +244,31 @@ circle {
 }
 
 #header-play-button > span {
-  padding: 5px !important;
+  padding: 6px 5px !important;
+  > div {
+    display: inline-block;
+  }
+  .sk-double-bounce > div {
+    top: 2px;
+  }
+}
+
+#game-summary-layer {
+  .summary-score {
+    .grommetux-value__value {
+      color: $turquoise;
+    }
+  }
+
+  .summary-location {
+    svg path {
+      stroke: $red-orange;
+    }
+  }
+}
+
+.grommetux-button__icon {
+  display: inline;
 }
 
 @import 'styles/App-dark-mode.scss';

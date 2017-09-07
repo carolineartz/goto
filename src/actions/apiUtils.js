@@ -32,15 +32,3 @@ export const buildTopPlacesEndpoint = ({date = moment()}) => {
 
   return buildEndpoint(placesQuery);
 };
-
-export const buildInitialEndpoint = (query) => {
-  const maxDate = randomMomentBefore();
-  const minDate = randomMomentBefore({when: maxDate});
-  const timeQuery = {
-    min_date_upload: minDate.unix(),
-    max_date_upload: maxDate.unix()
-  };
-
-  return buildEndpoint({...query, ...timeQuery});
-};
-

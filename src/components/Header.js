@@ -25,7 +25,7 @@ const Header = ({
   hasStarted,
   mapIsShown,
   onClickNextRound,
-  onClickOverview,
+  onClickShowOverview,
   onClickPlay,
   onClickShowSummary,
   onClickSubmitGuess,
@@ -54,7 +54,7 @@ const Header = ({
             <Button
               accent
               label="What is This?"
-              onClick={onClickOverview}
+              onClick={onClickShowOverview}
             />
           </Box>
         </Box>
@@ -126,7 +126,7 @@ Header.propTypes = {
   hasStarted: PropTypes.bool.isRequired,
   mapIsShown: PropTypes.bool.isRequired,
   onClickNextRound: PropTypes.func.isRequired,
-  onClickOverview: PropTypes.func.isRequired,
+  onClickShowOverview: PropTypes.func.isRequired,
   onClickPlay: PropTypes.func.isRequired,
   onClickShowSummary: PropTypes.func.isRequired,
   onClickSubmitGuess: PropTypes.func.isRequired,

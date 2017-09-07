@@ -2,26 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Layer, Box, Headline } from './grommet';
 
-const GameOverviewOverlay = ({isVisible, onClickPlay}) => (
+const GameOverviewOverlay = ({hidden, onClickPlay, mode}) => (
   <Layer
-    hidden={!isVisible}
-    id="game-preview-layer"
+    hidden={hidden}
+    id="game-overview-layer"
+    className={mode === 'dark' ? 'dark-mode' : 'light-mode'}
   >
     <Box pad="medium" full>
       <Headline strong={true}
         size='medium'>
         TODO: Put Instructions Here!
       </Headline>
-      <Button box margin="medium" alignSelf="center" justify="center" onClick={onClickPlay}>
-        Play
-      </Button>
+      <Box>
+        <Button
+          onClick={onClickPlay}
+          style={{width: '188px'}}
+          className="grommetux-button__accent-3"
+          label='Play'
+        />
+      </Box>
     </Box>
   </Layer>
 );
 
 GameOverviewOverlay.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-  onClickPlay: PropTypes.func.isRequired
+  hidden: PropTypes.bool.isRequired,
+  onClickPlay: PropTypes.func.isRequired,
+  mode: PropTypes.string.isRequired
 };
 
 export default GameOverviewOverlay;
