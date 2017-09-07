@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import classNames  from 'classnames';
 
 import { roundImagesLoadMore } from '../../actions/round';
@@ -8,9 +8,9 @@ import { roundImagesLoadMore } from '../../actions/round';
 import { Button, Box } from './../grommet';
 
 const LoadMoreImages = ({
-  round,
   canLoadMore,
-  loadMore
+  loadMore,
+  round,
 }) => {
   const moreButtonClassName = classNames({
     disabled: !canLoadMore,
@@ -31,14 +31,14 @@ const LoadMoreImages = ({
 };
 
 LoadMoreImages.propTypes = {
-  round: PropTypes.any,
   canLoadMore: PropTypes.bool.isRequired,
-  loadMore: PropTypes.func.isRequired
+  loadMore: PropTypes.func.isRequired,
+  round: PropTypes.any,
 };
 
 const select = (state) => ({
+  canLoadMore: state.round.current.possiblePoints > 10 && !state.round.guessCoordinates,
   round: state.round.current,
-  canLoadMore: state.round.current.possiblePoints > 10 && !state.round.guessCoordinates
 });
 
 const send =(dispatch) => ({

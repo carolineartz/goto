@@ -18,22 +18,22 @@ import {
 import RoundStatus from './RoundStatus';
 
 const Header = ({
-  hasStarted,
-  onClickPlay,
-  onClickOverview,
-  onClickToggleShowMap,
-  onClickSubmitGuess,
-  onClickNextRound,
-  onClickShowSummary,
-  roundPossiblePoints,
-  totalScore,
-  style,
-  hasPin,
   currentRound,
-  roundIsComplete,
   gameIsComplete,
+  gameReady,
+  hasPin,
+  hasStarted,
   mapIsShown,
-  gameReady
+  onClickNextRound,
+  onClickOverview,
+  onClickPlay,
+  onClickShowSummary,
+  onClickSubmitGuess,
+  onClickToggleShowMap,
+  roundIsComplete,
+  roundPossiblePoints,
+  style,
+  totalScore,
 }) => (
   <GHeader style={{...style}} size="small" justify="center">
     {
@@ -119,22 +119,22 @@ const Header = ({
 );
 
 Header.propTypes = {
-  hasStarted: PropTypes.bool.isRequired,
-  onClickPlay: PropTypes.func.isRequired,
-  onClickOverview: PropTypes.func.isRequired,
-  onClickToggleShowMap: PropTypes.func.isRequired,
-  onClickSubmitGuess: PropTypes.func.isRequired,
-  onClickNextRound: PropTypes.func.isRequired,
-  onClickShowSummary: PropTypes.func.isRequired,
-  roundPossiblePoints: PropTypes.number,
-  totalScore: PropTypes.number,
-  style: PropTypes.any,
   currentRound: PropTypes.any,
-  hasPin: PropTypes.bool.isRequired,
-  roundIsComplete: PropTypes.bool.isRequired,
   gameIsComplete: PropTypes.bool.isRequired,
+  gameReady: PropTypes.bool.isRequired,
+  hasPin: PropTypes.bool.isRequired,
+  hasStarted: PropTypes.bool.isRequired,
   mapIsShown: PropTypes.bool.isRequired,
-  gameReady: PropTypes.bool.isRequired
+  onClickNextRound: PropTypes.func.isRequired,
+  onClickOverview: PropTypes.func.isRequired,
+  onClickPlay: PropTypes.func.isRequired,
+  onClickShowSummary: PropTypes.func.isRequired,
+  onClickSubmitGuess: PropTypes.func.isRequired,
+  onClickToggleShowMap: PropTypes.func.isRequired,
+  roundIsComplete: PropTypes.bool.isRequired,
+  roundPossiblePoints: PropTypes.number,
+  style: PropTypes.any,
+  totalScore: PropTypes.number,
 };
 
 export default Header;

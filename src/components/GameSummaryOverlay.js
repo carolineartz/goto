@@ -47,44 +47,42 @@ const GameSummaryOverlay = ({hidden, score, rounds, onClickPlayAgain}) =>
             </Box>
           </Box>
         </ListItem>
-        { rounds.map((round, i) => {
-          const key = `roundSummary-${i}`;
-          return (
-            <ListItem key={key} justify='between'>
-              <Value value={round.score}
-                label={`Round ${round.number}`}
-                units='points'
-                size='medium' />
-              <Value value={round.distance}
-                icon={<LocationIcon />}
-                label={round.placeName}
-                units='mi'
-                responsive
-                size='medium'
-                align='start'
+        { rounds.map((round, i) =>
+          <ListItem key={`roundSummary-${i}`} justify='between'>
+            <Value value={round.score}
+              label={`Round ${round.number}`}
+              units='points'
+              size='medium' />
+            <Value value={round.distance}
+              icon={<LocationIcon />}
+              label={round.placeName}
+              units='mi'
+              responsive
+              size='medium'
+              align='start'
+            />
+            <Box id={`round${i+1}-map`}>
+              <AmCharts.React
+                style={{width: '500px', height: '300px'}}
+                options={makeMap({
+                  elementId: `round${round.number}-map`,
+                  placeCoordinates: round.placeCoordinates,
+                  guessCoordinates: round.guessCoordinates,
+                  placeName: round.placeName
+                })}
               />
-              <Box id={`round${i+1}-map`}>
-                <AmCharts.React
-                  style={{width: '500px', height: '300px'}}
-                  options={makeMap({
-                    elementId: `round${round.number}-map`,
-                    placeCoordinates: round.placeCoordinates,
-                    guessCoordinates: round.guessCoordinates,
-                    placeName: round.placeName
-                  })}
-                />
-              </Box>
-            </ListItem>);
-        })}
+            </Box>
+          </ListItem>)
+        }
       </List>
     </Box>
   </Layer>;
 
 GameSummaryOverlay.propTypes = {
-  rounds: PropTypes.array.isRequired,
   hidden: PropTypes.bool.isRequired,
+  onClickPlayAgain: PropTypes.func.isRequired,
+  rounds: PropTypes.array.isRequired,
   score: PropTypes.number.isRequired,
-  onClickPlayAgain: PropTypes.func.isRequired
 };
 
 export default GameSummaryOverlay;

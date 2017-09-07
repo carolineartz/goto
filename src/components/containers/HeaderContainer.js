@@ -25,69 +25,69 @@ class HeaderContainer extends Component {
   render() {
     return (
       <Header
-        onClickPlay={() => this.props.startGame()}
-        onClickNextRound={() => this.props.startNextRound({round: this.props.currentRound})}
-        onClickOverview={() => this.props.showOverview()}
-        onClickSubmitGuess={() => this.props.hasPin ? this.props.makeGuess(this.props.currentRound, this.props.pinCoordinates) : null }
-        onClickToggleShowMap={() => this.props.toggleShowMap()}
-        onClickShowSummary={() => this.props.showSummary()}
         currentRound={this.props.currentRound}
+        gameIsComplete={this.props.gameIsComplete}
+        gameReady={this.props.gameReady}
         hasPin={this.props.hasPin}
         hasStarted={this.props.hasStarted}
-        roundIsComplete={this.props.roundIsComplete}
-        gameIsComplete={this.props.gameIsComplete}
         mapIsShown={this.props.mapIsShown}
-        style={this.props.style}
+        onClickNextRound={() => this.props.startNextRound({round: this.props.currentRound})}
+        onClickOverview={() => this.props.showOverview()}
+        onClickPlay={() => this.props.startGame()}
+        onClickShowSummary={() => this.props.showSummary()}
+        onClickSubmitGuess={() => this.props.hasPin ? this.props.makeGuess(this.props.currentRound, this.props.pinCoordinates) : null }
+        onClickToggleShowMap={() => this.props.toggleShowMap()}
+        roundIsComplete={this.props.roundIsComplete}
         roundPossiblePoints={this.props.possiblePoints}
+        style={this.props.style}
         totalScore={this.props.totalScore}
-        gameReady={this.props.gameReady}
       />
     );
   }
 }
 
 HeaderContainer.propTypes = {
-  startGame: PropTypes.func.isRequired,
   createGame: PropTypes.func.isRequired,
-  showOverview: PropTypes.func.isRequired,
-  makeGuess: PropTypes.func.isRequired,
-  toggleShowMap: PropTypes.func.isRequired,
-  showSummary: PropTypes.func.isRequired,
   currentRound: PropTypes.any,
-  startNextRound: PropTypes.func.isRequired,
-  possiblePoints: PropTypes.number.isRequired,
-  totalScore: PropTypes.number.isRequired,
-  pinCoordinates:PropTypes.any,
-  roundIsComplete: PropTypes.bool.isRequired,
+  gameIsComplete: PropTypes.bool.isRequired,
+  gameReady: PropTypes.bool.isRequired,
   hasPin: PropTypes.bool.isRequired,
   hasStarted: PropTypes.bool.isRequired,
-  gameIsComplete: PropTypes.bool.isRequired,
+  makeGuess: PropTypes.func.isRequired,
   mapIsShown: PropTypes.bool.isRequired,
-  gameReady: PropTypes.bool.isRequired,
-  style: PropTypes.any
+  pinCoordinates:PropTypes.any,
+  possiblePoints: PropTypes.number.isRequired,
+  roundIsComplete: PropTypes.bool.isRequired,
+  showOverview: PropTypes.func.isRequired,
+  showSummary: PropTypes.func.isRequired,
+  startGame: PropTypes.func.isRequired,
+  startNextRound: PropTypes.func.isRequired,
+  style: PropTypes.any,
+  toggleShowMap: PropTypes.func.isRequired,
+  totalScore: PropTypes.number.isRequired,
 };
 
 const select = (state, ownProps) => ({
   currentRound: state.round.current,
-  roundIsComplete: !!state.round.guessCoordinates,
+  gameIsComplete: state.game.completed,
+  gameReady: state.round.allInitialImagesSet,
   hasPin: !!state.round.pinCoordinates,
+  hasStarted: state.game.started,
+  mapIsShown: state.game.mapIsShown,
   pinCoordinates: state.round.pinCoordinates,
   possiblePoints: state.round.possiblePoints,
-  hasStarted: state.game.started,
+  roundIsComplete: !!state.round.guessCoordinates,
   totalScore: state.game.totalScore,
-  mapIsShown: state.game.mapIsShown,
-  gameReady: state.round.allInitialImagesSet,
-  gameIsComplete: state.game.completed
 });
 
 const send = (dispatch) => ({
   createGame: () => dispatch(gameCreate()),
-  showOverview: () => dispatch(gameOverviewDisplay()),
-  startNextRound: ({round}) => dispatch(roundStartNext(round)),
   makeGuess: (round, coordinates) => dispatch(roundMakeGuess(round, coordinates)),
-  toggleShowMap: () => dispatch(gameToggleMap()),
+  showOverview: () => dispatch(gameOverviewDisplay()),
+  showSummary: () => dispatch(gameShowSummary()),
   startGame: () => dispatch(gameStart()),
-  showSummary: () => dispatch(gameShowSummary())
+  startNextRound: ({round}) => dispatch(roundStartNext(round)),
+  toggleShowMap: () => dispatch(gameToggleMap()),
 });
 
 export default connect(select, send)(HeaderContainer);

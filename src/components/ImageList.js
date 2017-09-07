@@ -13,11 +13,11 @@ const spinner = (
 );
 
 const ImageList = ({
-  isLoading,
   images,
-  onImageClick,
+  isLoading,
   onCloseImage,
-  selectedImageSrc
+  onImageClick,
+  selectedImageSrc,
 }) =>
   <Box pad="medium" onKeyDown={(e) => (e.key === 'Escape') ? onCloseImage() : null }>
     { isLoading && spinner }
@@ -34,10 +34,10 @@ const ImageList = ({
 
 ImageList.propTypes = {
   images: PropTypes.array.isRequired,
-  selectedImageSrc: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
+  onCloseImage: PropTypes.func.isRequired,
   onImageClick: PropTypes.func.isRequired,
-  onCloseImage: PropTypes.func.isRequired
+  selectedImageSrc: PropTypes.string,
 };
 
 export default ImageList;

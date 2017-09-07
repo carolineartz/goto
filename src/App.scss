@@ -1,5 +1,3 @@
-@import 'styles/mask-transitions.scss';
-
 body {
   margin-top: -25px;
 }
@@ -17,6 +15,7 @@ div[id^="__AmCharts"] path {
 #root {
   position: relative;
 }
+
 
 * {
   outline: none !important;

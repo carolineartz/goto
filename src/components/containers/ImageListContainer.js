@@ -21,20 +21,20 @@ class ImageListContainer extends Component {
 }
 
 ImageListContainer.propTypes = {
+  deselectImage: PropTypes.func.isRequired,
   images: PropTypes.array.isRequired,
   selectedImageSrc: PropTypes.any,
   selectImage: PropTypes.func.isRequired,
-  deselectImage: PropTypes.func.isRequired
 };
 
 const select = (state) => ({
   images: state.round.current.images,
-  selectedImageSrc: state.images.selectedSrc
+  selectedImageSrc: state.images.selectedSrc,
 });
 
 const send = (dispatch) => ({
+  deselectImage: () => dispatch(imageDeselect()),
   selectImage: (imageSrc) => dispatch(imageSelect(imageSrc)),
-  deselectImage: () => dispatch(imageDeselect())
 });
 
 

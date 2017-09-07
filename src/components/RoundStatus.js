@@ -44,8 +44,8 @@ const RoundStatus = ({round, hidden}) =>
   </Animate>;
 
 RoundStatus.propTypes = {
+  hidden: PropTypes.bool.isRequired,
   round: PropTypes.any,
-  hidden: PropTypes.bool.isRequired
 };
 
 export default RoundStatus;
