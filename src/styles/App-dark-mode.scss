@@ -176,7 +176,7 @@ $continent-map: (
 
 .round-info-box {
   .round-score {
-    background: $teal-to-cyan;
+    background: #fd5832;
     color: $blackish;
     svg path {
       stroke: $blackish !important;
@@ -185,10 +185,13 @@ $continent-map: (
 
   .round-location {
     background: $dark-blue;
-    border: 3px solid $teal-to-cyan;
-    color: $teal-to-cyan;
+    border: 3px solid #fd5832;
+    color: #fd5832;
+    .grommetux-value__label {
+      color: $neutral-1;
+    }
     svg path {
-      stroke: $teal-to-cyan!important;
+      stroke: #fd5832!important;
     }
   }
 }

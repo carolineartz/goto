@@ -4,6 +4,8 @@ import {
   gameComplete
 } from './game';
 
+import { fetchImages } from './Api';
+
 export const ROUND_CREATE = 'ROUND_CREATE';
 export const ROUND_IMAGES_FETCH_FAILURE = 'ROUND_IMAGES_FETCH_FAILURE';
 export const ROUND_START_NEXT = 'ROUND_START_NEXT';
@@ -12,11 +14,20 @@ export const ROUND_MAKE_GUESS = 'ROUND_MAKE_GUESS';
 export const ROUND_IMAGES_SET = 'ROUND_IMAGES_SET';
 export const ROUND_UPDATE_GUESS = 'ROUND_UPDATE_GUESS';
 export const ROUND_RESET = 'ROUND_RESET';
+export const ROUND_IMAGES_LOAD_MORE = 'ROUND_IMAGES_LOAD_MORE';
+export const ROUND_IMAGES_FETCH_SUCCESS = 'ROUND_IMAGES_FETCH_SUCCESS';
+export const ROUND_DECREASE_POSSIBLE_POINTS = 'ROUND_DECREASE_POSSIBLE_POINTS';
 
 export const roundImagesSet = (round, images) => ({
   type: ROUND_IMAGES_SET,
   round,
   images: round.images
+});
+
+export const roundImagesFetchSucess = (round, images) => ({
+  type: ROUND_IMAGES_FETCH_SUCCESS,
+  round,
+  images
 });
 
 export const roundImagesFetchFailure = (error) => ({
@@ -41,6 +52,17 @@ export const roundReset = () => ({
   type: ROUND_RESET
 });
 
+export const roundDecreasePossiblePoints = (round, possiblePoints) => ({
+  type: ROUND_DECREASE_POSSIBLE_POINTS,
+  round,
+  possiblePoints
+});
+
+const _roundImagesLoadMore = (round) => ({
+  type: ROUND_IMAGES_LOAD_MORE,
+  round
+});
+
 const _roundStartNext = (round) => ({
   type: ROUND_START_NEXT,
   currentRound: round
@@ -50,6 +72,17 @@ const _roundMakeGuess = (round) => ({
   type: ROUND_MAKE_GUESS,
   round
 });
+
+export const roundImagesLoadMore = (round) =>
+  (dispatch) => (
+    Promise.all([
+      Promise.resolve(dispatch(_roundImagesLoadMore(round))),
+      Promise.resolve(dispatch(roundDecreasePossiblePoints(round, round.reducePossiblePoints())))
+    ]).then(() =>
+      fetchImages(round.placeId, 5, round.nextPageImagesNumber)
+    ).then(images => dispatch(roundImagesFetchSucess(round, round.addImages(images) && images)))
+      .catch(e =>  dispatch(roundImagesFetchFailure(e)))
+  );
 
 export const roundStartNext = (round) =>
   (dispatch) => {

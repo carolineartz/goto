@@ -33,10 +33,9 @@ class HeaderContainer extends Component {
         onClickShowSummary={() => this.props.showSummary()}
         currentRound={this.props.currentRound}
         hasPin={this.props.hasPin}
-        hasGuess={this.props.hasGuess}
         hasStarted={this.props.hasStarted}
-        roundIsComplete={this.props.hasGuess}
-        gameIsComplete={this.props.isCompleted}
+        roundIsComplete={this.props.roundIsComplete}
+        gameIsComplete={this.props.gameIsComplete}
         mapIsShown={this.props.mapIsShown}
         style={this.props.style}
         roundPossiblePoints={this.props.possiblePoints}
@@ -59,10 +58,10 @@ HeaderContainer.propTypes = {
   possiblePoints: PropTypes.number.isRequired,
   totalScore: PropTypes.number.isRequired,
   pinCoordinates:PropTypes.any,
+  roundIsComplete: PropTypes.bool.isRequired,
   hasPin: PropTypes.bool.isRequired,
-  hasGuess: PropTypes.bool.isRequired,
   hasStarted: PropTypes.bool.isRequired,
-  isCompleted: PropTypes.bool.isRequired,
+  gameIsComplete: PropTypes.bool.isRequired,
   mapIsShown: PropTypes.bool.isRequired,
   gameReady: PropTypes.bool.isRequired,
   style: PropTypes.any
@@ -70,7 +69,7 @@ HeaderContainer.propTypes = {
 
 const select = (state, ownProps) => ({
   currentRound: state.round.current,
-  hasGuess: !!state.round.guessCoordinates,
+  roundIsComplete: !!state.round.guessCoordinates,
   hasPin: !!state.round.pinCoordinates,
   pinCoordinates: state.round.pinCoordinates,
   possiblePoints: state.round.possiblePoints,
@@ -78,7 +77,7 @@ const select = (state, ownProps) => ({
   totalScore: state.game.totalScore,
   mapIsShown: state.game.mapIsShown,
   gameReady: state.round.allInitialImagesSet,
-  isCompleted: state.game.completed
+  gameIsComplete: state.game.completed
 });
 
 const send = (dispatch) => ({

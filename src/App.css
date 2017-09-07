@@ -644,17 +644,19 @@ circle {
       stroke: #505164; }
 
 .round-info-box .round-score {
-  background: #6afff3;
+  background: #fd5832;
   color: #05060A; }
   .round-info-box .round-score svg path {
     stroke: #05060A !important; }
 
 .round-info-box .round-location {
   background: #141526;
-  border: 3px solid #6afff3;
-  color: #6afff3; }
+  border: 3px solid #fd5832;
+  color: #fd5832; }
+  .round-info-box .round-location .grommetux-value__label {
+    color: #9193a8; }
   .round-info-box .round-location svg path {
-    stroke: #6afff3 !important; }
+    stroke: #fd5832 !important; }
 
 #game-summary-layer > div {
   background: #141526;

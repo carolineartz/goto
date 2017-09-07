@@ -6,6 +6,7 @@ import {
 } from './round';
 
 import { fetchPlaces, fetchImages } from './Api';
+import { roundStartNext } from './round';
 
 import Round from './../models/Round';
 
@@ -49,7 +50,7 @@ export const gameHideMap = () => ({
   type: GAME_HIDE_MAP
 });
 
-export const gameStart = () => ({
+const _gameStart = () => ({
   type: GAME_START
 });
 
@@ -94,6 +95,12 @@ const getInitialRoundImages = (round) =>
         images => dispatch(roundImagesSet(round, round.addImages(images))),
         error => dispatch(roundImagesFetchFailure(error))
       );
+
+export const gameStart = () =>
+  (dispatch) => {
+    dispatch(_gameStart());
+    dispatch(roundStartNext());
+  };
 
 export const gameCreate = () =>
   (dispatch, getState) =>

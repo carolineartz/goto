@@ -15,6 +15,7 @@ import ImageListContainer from './components/containers/ImageListContainer';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
 import GameSummaryOverlay from './components/GameSummaryOverlay';
+import LoadMoreImages from './components/containers/LoadMoreImages';
 
 const App = ({
   mode,
@@ -33,6 +34,7 @@ const App = ({
         { ({style}) => <HeaderContainer style={style} /> }
       </Sticky>
       { gameStarted && <ImageListContainer /> }
+      { gameStarted && <LoadMoreImages /> }
       <Footer />
     </StickyContainer>
   </GApp>

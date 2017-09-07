@@ -1,13 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames  from 'classnames';
-import { connect } from 'react-redux';
 
-import { getImages } from '../../actions/images';
+import { roundImagesLoadMore } from '../../actions/round';
 
-import { Button } from './../grommet';
+import { Button, Box } from './../grommet';
 
-let LoadMoreImages = ({nextPage, placeId, canLoadMore, loadMoreImages}) => {
+const LoadMoreImages = ({
+  round,
+  canLoadMore,
+  loadMore
+}) => {
   const moreButtonClassName = classNames({
     disabled: !canLoadMore,
     'grommetux-button--accent-3': true,
@@ -15,32 +19,30 @@ let LoadMoreImages = ({nextPage, placeId, canLoadMore, loadMoreImages}) => {
   });
 
   return (
-    <Button
-      className={moreButtonClassName}
-      disabled={!canLoadMore}
-      label="More?"
-      onClick={() => loadMoreImages({placeId, page: nextPage})}
-    />
+    <Box basis="full" pad="medium" align="center">
+      <Button
+        className={moreButtonClassName}
+        disabled={!canLoadMore}
+        label="More?"
+        onClick={() => canLoadMore ? loadMore(round) : null}
+      />
+    </Box>
   );
 };
 
 LoadMoreImages.propTypes = {
-  nextPage: PropTypes.number.isRequired,
-  placeId: PropTypes.string.isRequired,
+  round: PropTypes.any,
   canLoadMore: PropTypes.bool.isRequired,
-  loadMoreImages: PropTypes.func.isRequired
+  loadMore: PropTypes.func.isRequired
 };
 
 const select = (state) => ({
-  nextPage: state.images.page + 1,
-  placeId: state.round.current.place.externalId || state.images.placeId,
-  canLoadMore: state.round.current.possiblePoints > 10
+  round: state.round.current,
+  canLoadMore: state.round.current.possiblePoints > 10 && !state.round.guessCoordinates
 });
 
 const send =(dispatch) => ({
-  loadMoreImages: ({placeId, page}) => dispatch(getImages({placeId, page, more: true})),
+  loadMore: (round) => dispatch(roundImagesLoadMore(round)),
 });
 
-LoadMoreImages = connect(select, send)(LoadMoreImages);
-
-export default LoadMoreImages;
+export default connect(select, send)(LoadMoreImages);

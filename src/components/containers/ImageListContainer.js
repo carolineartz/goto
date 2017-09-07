@@ -28,7 +28,7 @@ ImageListContainer.propTypes = {
 };
 
 const select = (state) => ({
-  images: state.round.current.images[0],
+  images: state.round.current.images,
   selectedImageSrc: state.images.selectedSrc
 });
 

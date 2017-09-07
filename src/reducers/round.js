@@ -6,7 +6,10 @@ import {
   ROUND_DROP_PIN,
   ROUND_MAKE_GUESS,
   ROUND_IMAGES_SET,
-  ROUND_RESET
+  ROUND_RESET,
+  ROUND_IMAGES_FETCH_FAILURE,
+  ROUND_IMAGES_FETCH_SUCCESS,
+  ROUND_DECREASE_POSSIBLE_POINTS
 } from '../actions/round';
 
 const initialState = {
@@ -18,22 +21,21 @@ const initialState = {
   guessCoordinates: undefined,
   all: [],
   countImagesSetForRounds: 0,
-  allInitialImagesSet: false
+  allInitialImagesSet: false,
+  error: undefined
 };
 
 const handlers = {
   [ROUND_CREATE]: (state, action) => ({
-    current: action.round.number === 1 ? action.round : state.current,
-    placeCoordinates: state.placeCoordinates ? state.placeCoordinates : action.round.place.coordinates,
     all: [...state.all, action.round]
   }),
 
   [ROUND_START_NEXT]: (state, action) => {
-    const current = state.current;
-    const next = state.all.find(round => round.number === current.number + 1);
+    const currentRoundNumber = state.current ? state.current.number : 0;
+    const next = state.all.find(round => round.number === currentRoundNumber + 1);
     return {
       current: next,
-      placeCoordinates: next.place.coordinates,
+      placeCoordinates: next.placeCoordinates,
       markers: [],
       possiblePoints: 100,
       pinCoordinates: undefined,
@@ -70,6 +72,18 @@ const handlers = {
 
   [ROUND_RESET]: (state, action) => ({
     ...initialState
+  }),
+
+  [ROUND_IMAGES_FETCH_SUCCESS]: (state, action) => ({
+    ...state
+  }),
+
+  [ROUND_IMAGES_FETCH_FAILURE]: (state, action) => ({
+    error: action.error
+  }),
+
+  [ROUND_DECREASE_POSSIBLE_POINTS]: (state, action) => ({
+    possiblePoints: action.possiblePoints
   })
 };
 

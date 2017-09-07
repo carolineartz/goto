@@ -2,7 +2,7 @@ import { createReducer } from './utils';
 
 import {
   IMAGE_SELECT,
-  IMAGE_DESELECT,
+  IMAGE_DESELECT
 } from '../actions/images';
 
 const initialState = {

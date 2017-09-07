@@ -28,7 +28,6 @@ const Header = ({
   roundPossiblePoints,
   totalScore,
   style,
-  hasGuess,
   hasPin,
   currentRound,
   roundIsComplete,
@@ -90,14 +89,14 @@ const Header = ({
                 <Button
                   style={{width: '188px'}}
                   className="grommetux-button__accent-3"
-                  icon={<PlayIcon />}
+                  icon={gameIsComplete ? undefined : <PlayIcon />}
                   label={gameIsComplete ? 'Show Summary' : 'Next Round'}
                   onClick={gameIsComplete ? onClickShowSummary : onClickNextRound}
                 /> :
                 <Button
                   style={{width: '188px'}}
                   className={classNames({disabled: !hasPin})}
-                  disabled={!hasGuess}
+                  disabled={!roundIsComplete}
                   accent
                   icon={<CompassIcon />}
                   label="Submit Guess"
@@ -131,7 +130,6 @@ Header.propTypes = {
   totalScore: PropTypes.number,
   style: PropTypes.any,
   currentRound: PropTypes.any,
-  hasGuess: PropTypes.bool.isRequired,
   hasPin: PropTypes.bool.isRequired,
   roundIsComplete: PropTypes.bool.isRequired,
   gameIsComplete: PropTypes.bool.isRequired,

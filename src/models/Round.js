@@ -30,6 +30,11 @@ export default Transis.Model.extend('Round', function() {
     }
   });
 
+  this.prop('nextPageImagesNumber', {
+    on: ['images'],
+    get: (images) => images.length/2 + 1
+  });
+
   this.prop('placeCoordinates', {
     on: ['place'],
     get: (place) => place.coordinates
@@ -54,7 +59,7 @@ export default Transis.Model.extend('Round', function() {
   };
 
   this.prototype.addImages = function(images) {
-    this.images = [images, ...this.images];
+    this.images = [...this.images, ...images];
     return this.images;
   };
 
