@@ -26,6 +26,7 @@
     "react-dom": "^15.6.1",
     "react-google-maps": "^7.2.0",
     "react-masonry-component": "^5.0.7",
+    "react-progressive-bg-image": "^2.0.4",
     "react-redux": "^5.0.6",
     "react-rnd": "^5.1.2",
     "react-scripts": "1.0.11",
@@ -36,6 +37,7 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "styled-components": "^2.1.2",
     "transis": "^0.11.1"
   },
   "proxy": "http://localhost:4000",

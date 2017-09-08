@@ -10,8 +10,11 @@ const getRandomNum = (min, max) => {
 export const randomMomentBefore = ({when = moment(), min = 2, max = 1000} = {}) =>
   when.subtract(Math.round(getRandomNum(min, max)), 'days');
 
-export const buildSrc = ({farm, server, id, secret}) =>
-  `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
+export const buildSrc = ({farm, server, id, secret, thumb = false} = {}) => {
+  const beginning = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}`;
+  const end = thumb ? '_s.jpg' : '.jpg';
+  return beginning + end;
+};
 
 export const buildEndpoint = (query) => {
   const baseQuery = {

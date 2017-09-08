@@ -25,7 +25,14 @@ const ImageList = ({
       {
         images.map((image, i) => {
           const src = buildSrc({...image});
-          return <Image key={`${image.id}-${i}`} src={src} onClick={() => onImageClick(src)} />;
+          return (
+            <Image
+              key={`${image.id}-${i}`}
+              src={src}
+              thumb={buildSrc({...image, thumb: true})}
+              onClick={() => onImageClick(src)}
+            />
+          );
         })
       }
     </Tiles>
