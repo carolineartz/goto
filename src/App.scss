@@ -246,10 +246,10 @@ circle {
 #header-play-button > span {
   padding: 6px 5px !important;
   > div {
-    display: inline-block;
+    // display: inline-block;
   }
   .sk-double-bounce > div {
-    top: 2px;
+    // top: 2px;
   }
 }
 
@@ -268,7 +268,7 @@ circle {
 }
 
 .grommetux-button__icon {
-  display: inline;
+  // display: inline;
 }
 
 @import 'styles/App-dark-mode.scss';

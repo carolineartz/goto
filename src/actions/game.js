@@ -71,13 +71,11 @@ export const gameCreate = () =>
       .then(() => createRounds(dispatch, getState))
       .then(() => setRoundsInitialImages(dispatch, getState))
       .then(() => dispatch({type: GAME_CREATE_SUCCESS}))
-      .catch((e) =>dispatch({type: GAME_CREATE_FAILURE, error: e}));
+      .catch((e) => dispatch({type: GAME_CREATE_FAILURE, error: e}));
 
 export const gameStart = () =>
   (dispatch, getState) => {
-    if (getState().game.overviewIsShown) {
-      dispatch(gameHideOverview());
-    }
+    if (getState().game.overviewIsShown) dispatch(gameHideOverview());
     dispatch(roundStartNext());
     dispatch({type: GAME_START});
   };

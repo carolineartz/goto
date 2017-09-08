@@ -12,7 +12,8 @@ import { App as GApp } from './components/grommet';
 import GoogleMapsContainer from './components/containers/GoogleMapsContainer';
 import HeaderContainer from './components/containers/HeaderContainer';
 import ImageListContainer from './components/containers/ImageListContainer';
-import Hero from './components/Hero';
+import HeroContainer from './components/containers/HeroContainer';
+
 import Footer from './components/Footer';
 import GameSummaryOverlay from './components/GameSummaryOverlay';
 import GameOverviewOverlay from './components/GameOverviewOverlay';
@@ -29,7 +30,7 @@ const App = ({
   overviewIsShown
 }) => (
   <GApp className={`${mode}-mode`} centered={false}>
-    <Hero mode={mode} />
+    <HeroContainer />
     <GoogleMapsContainer mode={mode} />
     <GameSummaryOverlay mode={mode} rounds={rounds} score={score} hidden={!summaryIsShown} onClickPlayAgain={playAgain} />
     <GameOverviewOverlay mode={mode} hidden={!overviewIsShown} onClickPlay={play} />

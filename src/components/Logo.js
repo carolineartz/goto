@@ -1,5 +1,5 @@
 import React from 'react';
-import { SVGIcon } from './grommet';
+import { SVGIcon, Box } from './grommet';
 
 const Logo = () => (
   <SVGIcon viewBox="0 0 150 153"
@@ -17,5 +17,12 @@ const Logo = () => (
     </g>
   </SVGIcon>
 );
+
+const MainLogo = () =>
+  <Box className="logo-main-container" justify="center" align="center" size="medium">
+    <Logo />
+  </Box>;
+
+export { MainLogo };
 
 export default Logo;

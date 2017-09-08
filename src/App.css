@@ -246,19 +246,12 @@ circle {
 
 #header-play-button > span {
   padding: 6px 5px !important; }
-  #header-play-button > span > div {
-    display: inline-block; }
-  #header-play-button > span .sk-double-bounce > div {
-    top: 2px; }
 
 #game-summary-layer .summary-score .grommetux-value__value {
   color: #23b9d1; }
 
 #game-summary-layer .summary-location svg path {
   stroke: #fd5832; }
-
-.grommetux-button__icon {
-  display: inline; }
 
 .dark-mode.grommet.grommetux-app {
   background: #141526;

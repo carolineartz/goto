@@ -2,18 +2,16 @@ import { createReducer } from './utils';
 
 import {
   APP_CHANGE_MODE,
-  DARK,
-  LIGHT
+  DARK
 } from '../actions/app';
 
 const initialState = {
-  mode: DARK,
-  scrollingDisabled: false
+  mode: localStorage.getItem('mode') || DARK
 };
 
 const handlers = {
   [APP_CHANGE_MODE]: (state, action) => ({
-    mode: ((action.mode === DARK) ? LIGHT : DARK)
+    mode: action.toMode
   })
 };
 

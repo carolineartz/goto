@@ -3,9 +3,7 @@ import moment from 'moment';
 
 const FLICKR_API_KEY = 'd40ee562baf9070150afa3caf2e091b7';
 
-const getRandomNum = (min, max) => {
-  return Math.random() * (max - min + 1) + min;
-};
+const getRandomNum = (min, max) => Math.random() * (max - min + 1) + min;
 
 export const randomMomentBefore = ({when = moment(), min = 2, max = 1000} = {}) =>
   when.subtract(Math.round(getRandomNum(min, max)), 'days');

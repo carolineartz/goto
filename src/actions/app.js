@@ -8,7 +8,16 @@ export const COLOR_MODE_MAP = {
   [DARK]: '#505164'
 };
 
-export const appChangeMode = (mode) => ({
-  type: APP_CHANGE_MODE,
-  mode
-});
+export const appChangeMode = () =>
+  (dispatch, getState) => {
+    const toMode = getState().app.mode === LIGHT ? DARK : LIGHT;
+    dispatch({
+      type: APP_CHANGE_MODE,
+      toMode
+    });
+    localStorage.setItem('mode', toMode);
+  };
+
+// export const appChangeMode = () => ({
+//   type: APP_CHANGE_MODE
+// });

@@ -29,7 +29,7 @@ const GoogleMap = withScriptjs(withGoogleMap(props =>
         path={props.markers.map(m => m.position)}
         geodesic={true}
         options={{
-          strokeColor: '#ECEFFF',
+          strokeColor: props.mode === 'dark' ? '#ECEFFF' : '#141526',
           strokeWeight: 3,
           strokeLineCap: 'round',
           strokeOpacity: 1.0

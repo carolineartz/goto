@@ -37,5 +37,4 @@ const send = (dispatch) => ({
   selectImage: (imageSrc) => dispatch(imageSelect(imageSrc)),
 });
 
-
 export default connect(select, send)(ImageListContainer);

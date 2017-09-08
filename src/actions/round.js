@@ -71,7 +71,7 @@ export const roundImagesLoadMore = (round) =>
           type: ROUND_IMAGES_LOAD_MORE,
           round: round.addImages(images)
         });
-        return dispatch({
+        dispatch({
           type: ROUND_DECREASE_POSSIBLE_POINTS,
           round,
           possiblePoints: round.reducePossiblePoints()
@@ -85,13 +85,13 @@ export const roundMakeGuess = (round, coordinates) =>
       round: round.setGuessCoordinates(coordinates)
     });
     if (round.number === getState().game.numRounds) dispatch(gameComplete());
-    return dispatch(gameUpdateTotalScore(getState().round.current.score));
+    dispatch(gameUpdateTotalScore(getState().round.current.score));
   };
 
 export const roundStartNext = (round) =>
   (dispatch, getState) => {
     if (getState().game.mapIsShown) dispatch(gameHideMap());
-    return dispatch({
+    dispatch({
       type: ROUND_START_NEXT,
       currentRound: round
     });
